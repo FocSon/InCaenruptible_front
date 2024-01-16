@@ -3,7 +3,7 @@ import VideoPlayer from './VideoPlayer';
 
 const Home = () => {
     return (
-        <VideoPlayer length={40}/>
+        <VideoPlayer length={40} url="https://www.youtube.com/watch?v=Rq5SEhs9lws&ab_channel=Skillthrive"/>
     );
 };
 
