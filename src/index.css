@@ -58,13 +58,13 @@ nav {
   padding: 10px;
 }
 
-nav, nav ul, nav img, nav a {
+nav, nav ul, nav img, nav a, nav li {
   background-color: var(--navbar-bg-color);
 }
 
 .navbar-logo {
   height: 8vh; 
-  margin-right: 0px;
+  margin-right: 0;
 }
 
 nav ul {
