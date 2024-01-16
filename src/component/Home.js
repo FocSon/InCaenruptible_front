@@ -3,7 +3,7 @@ import VideoPlayer from './VideoPlayer';
 
 const Home = () => {
     return (
-        <VideoPlayer/>
+        <VideoPlayer length={40}/>
     );
 };
 

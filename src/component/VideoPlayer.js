@@ -2,10 +2,10 @@ import ReactPlayer from "react-player";
 import "./VideoPlayer.css";
 
 const VideoPlayer = (properties) => {
-    const { length } = properties.keys ? properties : { length: 50 };
+    const { length } = properties.length ? properties : { length: 50 };
 
-    const paddingTop  = 56.25 / (100/length);   // Keep the ration 18:9
-    const margin = Math.floor((length/2) * 10**2)/10**2;
+    const paddingTop  = 56.25 * (length/100);   // Keep the ration 18:9
+    const margin = (100-length)/2;
 
     const playerWrapperStyle = {
         position: 'relative',
