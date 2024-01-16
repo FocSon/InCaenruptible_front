@@ -1,21 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
+import logo from "../logo.png";
+import Dashboard from "../Dashboard";
 
 function Navbar() {
     return (
-        <nav>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/posts">Posts</Link>
-                </li>
-                <li>
-                    <Link to="/events">Events</Link>
-                </li>
-            </ul>
-        </nav>
+        <Router>
+            <nav>
+                <img src={logo} alt="Logo" className="navbar-logo" />
+
+                <ul>
+                    <li><Link to="*">Principal</Link></li>
+                    <li><Link to="/posts">Posts</Link></li>
+                    <li><Link to="/events">Evenements</Link></li>
+                </ul>
+            </nav>
+            <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+        </Router>
     );
 }
 

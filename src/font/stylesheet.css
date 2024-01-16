@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'KC Obra Letra';
+    src: url('KCObraLetraRegular.eot');
+    src: local('KC Obra Letra'), local('KCObraLetraRegular'),
+        url('KCObraLetraRegular.eot?#iefix') format('embedded-opentype'),
+        url('KCObraLetraRegular.woff2') format('woff2'),
+        url('KCObraLetraRegular.woff') format('woff'),
+        url('KCObraLetraRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'KC Obra Letra';
+    src: url('KCObraLetraBold.eot');
+    src: local('KC Obra Letra Bold'), local('KCObraLetraBold'),
+        url('KCObraLetraBold.eot?#iefix') format('embedded-opentype'),
+        url('KCObraLetraBold.woff2') format('woff2'),
+        url('KCObraLetraBold.woff') format('woff'),
+        url('KCObraLetraBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
