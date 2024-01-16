@@ -4,6 +4,7 @@ import logo from "../imgs/logo.png";
 import Home from "./Home";
 import Posts from "./Posts";
 import Events from "./Events";
+import './Navbar.css';
 
 function Navbar() {
     return (
@@ -17,6 +18,7 @@ function Navbar() {
                     <li><Link to="/events">Evenements</Link></li>
                 </ul>
             </nav>
+            <div className="navbar-spacer" />
             <Routes>
                 <Route path="*" element={<Home />} />
                 <Route path="/posts" element={<Posts />} />
