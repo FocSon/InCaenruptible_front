@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
-import logo from "../logo.png";
+import logo from "../imgs/logo.png";
 import Dashboard from "../Dashboard";
 
 function Navbar() {
