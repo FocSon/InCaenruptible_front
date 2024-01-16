@@ -10,17 +10,16 @@ function App() {
     document.documentElement.setAttribute('data-theme', 'light');
   }, []);
     return (
-      
-      <header>
+    <header>
       <Router>
         <nav>
-        <img src={logo} alt="Logo" className="navbar-logo" />
+          <img src={logo} alt="Logo" className="navbar-logo" />
 
           <ul>
             <li><Link to="/dashboard">Principal</Link></li>
             <li><Link to="/tasks">Posts</Link></li>
             <li><Link to="/penalty">Evenement</Link></li>
-         
+
             {/* more links */}
           </ul>
         </nav>
@@ -28,7 +27,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
 
-          
+
           {/* more routes */}
         </Routes>
       </Router>
