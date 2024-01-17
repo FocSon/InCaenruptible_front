@@ -18,7 +18,7 @@ const AdminLogin = () => {
             <form className="login-form" onSubmit={handlesubmit}>
                 <input type="text" placeholder="Username" required/>
                 <input type="password" placeholder="Password" required />
-                <button type="submit">Login</button>
+                <button type="submit" className='title'>Login</button>
             </form>
         );
     }
@@ -26,8 +26,8 @@ const AdminLogin = () => {
         console.log(loginService.isLoggedIn);                               
         return (
             <div className="logout-text">
-                <h2>You are logged in</h2>
-                <button onClick={logoutCall}>logout</button>     
+                <h2 className='text-login'>You are logged in</h2>
+                <button className='text-login' onClick={logoutCall}>logout</button>     
             </div>
         );
     }
