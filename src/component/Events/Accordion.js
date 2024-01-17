@@ -16,11 +16,11 @@ function AccordionComponent({ items }) {
   return (
     <Box p={5}>
       <h1>Fil des alertes</h1>
-      <Accordion allowToggle>
+      <Accordion>
         {accordionItems.map((item, index) => (
           <AccordionItem key={index}>
             <h2>
-              <AccordionButton onClick={() => handleToggle(index)}>
+              <AccordionButton onClick={() => handleToggle(index)} _expanded={{ bg: "gray.100" }}>
                 <Box flex="1" textAlign="left">
                   {item.title}
                 </Box>

@@ -2,12 +2,15 @@ import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import AccordionComponent from './Accordion';
 import theme from './AccordionTheme'; // Import the theme
+import FilterComponent from './Filter'; // Import the FilterComponent from the new file
+
 
 
 const Event = () => {
 
+  //-------------------------------fetch alert------------------------------------
   const responses = [];
-  
+
   const responseData1 = {
     id: 1,
     title: 'Sample Alert',
@@ -33,6 +36,14 @@ const Event = () => {
 
   const items = [];
 
+  //-------------------------------------filtering------------------------------------
+  const handleFilterChange = (selectedFilters) => {
+    for(const filter in selectedFilters) {
+      console.log('Selected Filter:', filter);
+      
+    }
+  };
+
   //TODO : add flags to add video or mesurment in the alert if necessary
   for (let i=0; i<responses.length; i++) { //creating the alert list
     items.push( {
@@ -42,7 +53,8 @@ const Event = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <AccordionComponent items={items} />
+      <FilterComponent onFilterChange={handleFilterChange}/>
+      <AccordionComponent items={items}/>
     </ChakraProvider>
   );
 };
