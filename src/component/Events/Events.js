@@ -13,9 +13,9 @@ const Event = () => {
   ];
 
   return (
-    <ChakraProvider theme={theme}>
+    <main className=''>
       <AccordionComponent items={items} />
-    </ChakraProvider>
+    </main>
   );
 };
 

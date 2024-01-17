@@ -27,7 +27,7 @@ class Posts extends Component {
     this.setState({
       listPosts: [
         {
-          title: "Castor malheureux sur son petit rondin",
+          title: "Castor malheureux sur petit rondin",
           picture: castorImage,
           bodyText:
             "Petit Castor trouvé aux abords de la Folie Couvre Chef vers 18h le 13 Janvier 2024. L'animal était apparement seul, privé de ses congénères et semblait très triste. Il subit les agissements de la mairie de Caen.",
@@ -64,13 +64,13 @@ class Posts extends Component {
       <Card maxW="sm">
         <CardHeader></CardHeader>
         <CardBody>
-        <Image 
-          src={imageSrc} 
-          borderRadius="lg"
-          width="100%" // Set the width to 100% of the CardBody
-          height="200px" // Set a fixed height
-          objectFit="cover" // Cover the area without stretching the image
-        />
+          <Image
+            src={imageSrc}
+            borderRadius="lg"
+            width="100%" // Set the width to 100% of the CardBody
+            height="200px" // Set a fixed height
+            objectFit="cover" // Cover the area without stretching the image
+          />
           <Stack mt="6" spacing="3">
             <Heading size="md">{headingText}</Heading>
             <Text backgroundColor={"white"}>{bodyText}</Text>
@@ -92,8 +92,10 @@ class Posts extends Component {
     for (let i = 0; i < listPosts.length; i += 2) {
       const row = (
         <Flex
+          direction={{ base: "column", md: "row" }} // Stack vertically on small screens, horizontally on medium screens and up
           align="center"
           justify="center"
+          wrap="wrap" // Allows cards to wrap onto the next line if necessary
           className="rowCard"
           key={`row-${i}`}
         >
@@ -123,9 +125,8 @@ class Posts extends Component {
     return (
       <>
         <main className="content bodyColor">
-            <h2 className="title">INCAENRUPTIBLE</h2>
-            {this.renderRows()}
-            
+          <h2 className="title">INCAENRUPTIBLES</h2>
+          {this.renderRows()}
         </main>
       </>
     );

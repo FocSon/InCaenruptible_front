@@ -14,9 +14,3 @@ container: {
 })
 
 export const accordionTheme = defineMultiStyleConfig({ baseStyle })
-
-export const theme = extendTheme({
-    components: { Accordion: accordionTheme },
-  })
-
-export default theme;
