@@ -1,9 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
 import logo from "../imgs/logo.png";
-import Home from "./Home";
 import Posts from "./Posts";
+
 import Events from "./Events/Events";
+import Home from "./Home";
 
 function Navbar() {
     return (
