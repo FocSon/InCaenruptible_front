@@ -4,6 +4,10 @@ import Cookies from 'js-cookie';
 function openWebSocket() {
     const socket = new WebSocket('ws://localhost:8080');
 
+    const interval = setInterval(() => {
+        streamData(socket);
+    }, 100);
+
     socket.addEventListener('alertRefused', function (event) {
         socket.send('Stream refusé');
         socket.close();
@@ -16,6 +20,9 @@ function openWebSocket() {
 
     socket.addEventListener('alertAccepted', function (event) {
         console.log('Stream accepté');
+
+        Cookies.set("streamToken", event.token, { expires: 1 * 24 * 60 * 60 }); //Cookie expire dans 24 heures
+
         /*
         event = {
             requestId,
@@ -23,6 +30,13 @@ function openWebSocket() {
             alertId
         }
          */
+    });
+}
+
+function streamData(socket) {
+    socket.emit('streamData', {
+       data: undefined,
+       token: Cookies.get("streamToken")
     });
 }
 
@@ -44,7 +58,7 @@ async function createAlert(type, category, title, description) {
             throw new Error(response.statusText);
         }
 
-        Cookies.set("requestStreamToken", response.token, { expires: 1 * 24 * 60 * 60 }); //Cookie expire dans 24 heures
+        Cookies.set("streamToken", response.token, { expires: 1 * 24 * 60 * 60 }); //Cookie expire dans 24 heures
     } catch (e) {
         console.log(e);
         console.log("Error while creating alert");
