@@ -19,6 +19,7 @@ nav {
     align-items: center; /* Vertically align items */
     justify-content: space-between; /* Space between logo and ul */
     padding: 10px;
+    margin-bottom: 2vh;
 }
 
 nav, nav ul, nav img, nav a, nav li {
@@ -45,8 +46,4 @@ nav ul {
 
 nav ul li {
     margin: 0 15px; /* Space between list items */
-}
-
-.navbar-spacer {
-    height: 2vh;
 }

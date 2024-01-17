@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
 import logo from "../imgs/logo.png";
 import Home from "./Home";
-import Posts from "./Posts";
+import PostFeed from "./PostFeed";
 import Events from "./Events";
 import './Navbar.css';
 
@@ -18,10 +18,9 @@ function Navbar() {
                     <li><Link to="/events">Evenements</Link></li>
                 </ul>
             </nav>
-            <div className="navbar-spacer" />
             <Routes>
                 <Route path="*" element={<Home />} />
-                <Route path="/posts" element={<Posts />} />
+                <Route path="/posts" element={<PostFeed />} />
                 <Route path="/events" element={<Events />} />
             </Routes>
         </Router>
