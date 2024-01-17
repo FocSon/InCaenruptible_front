@@ -32,8 +32,13 @@ body {
   font-style: normal;
 }
 
-* {
+
+.bodyColor {
+
+  padding: 10px 0;
   background-color:var(--main-bg-color);
+  height: 100%;
+
 }
 
 /* Style the links */
@@ -85,3 +90,8 @@ nav ul li {
 }
 
 
+/*! -----------CARD------------ */
+
+.rowCard{
+  margin: 100px;
+}
