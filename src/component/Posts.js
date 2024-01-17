@@ -8,12 +8,40 @@ import {
   Image,
   Stack,
   CardHeader,
-  list,
 } from "@chakra-ui/react";
 import castorImage from "../imgs/castor.webp";
 import sadPoussin from "../imgs/sad_poussin.jpg";
 import eauMarron from "../imgs/eau_marron.jpg";
 import deversementEau from "../imgs/deversement_eau.webp";
+import Plx from "react-plx";
+
+const parallaxDataBackground = [
+  {
+    start: "self",
+    duration: 3000,
+    properties: [
+      {
+        startValue: 0,
+        endValue: -500,
+        property: "translateY",
+      },
+    ],
+  },
+];
+
+const parallaxDataTitle = [
+  {
+    start: "self",
+    duration: 150,
+    properties: [
+      {
+        startValue: 1,
+        endValue: 0,
+        property: "opacity",
+      },
+    ],
+  },
+];
 
 class Posts extends Component {
   constructor(props) {
@@ -61,25 +89,27 @@ class Posts extends Component {
   // Function to render card
   renderCard(imageSrc, headingText, bodyText, dateText) {
     return (
-      <Card maxW="sm">
-        <CardHeader></CardHeader>
-        <CardBody>
-          <Image
-            src={imageSrc}
-            borderRadius="lg"
-            width="100%" // Set the width to 100% of the CardBody
-            height="200px" // Set a fixed height
-            objectFit="cover" // Cover the area without stretching the image
-          />
-          <Stack mt="6" spacing="3">
-            <Heading size="md">{headingText}</Heading>
-            <Text backgroundColor={"white"}>{bodyText}</Text>
-            <Text color="blue.600" fontSize="2xl">
-              {dateText}
-            </Text>
-          </Stack>
-        </CardBody>
-      </Card>
+      <>
+        <Card maxW="sm">
+          <CardHeader></CardHeader>
+          <CardBody>
+            <Image
+              src={imageSrc}
+              borderRadius="lg"
+              width="100%" // Set the width to 100% of the CardBody
+              height="200px" // Set a fixed height
+              objectFit="cover" // Cover the area without stretching the image
+            />
+            <Stack mt="6" spacing="3">
+              <Heading size="md">{headingText}</Heading>
+              <Text backgroundColor={"white"}>{bodyText}</Text>
+              <Text color="blue.600" fontSize="2xl">
+                {dateText}
+              </Text>
+            </Stack>
+          </CardBody>
+        </Card>
+      </>
     );
   }
 
@@ -96,7 +126,7 @@ class Posts extends Component {
           align="center"
           justify="center"
           wrap="wrap" // Allows cards to wrap onto the next line if necessary
-          className="rowCard"
+          className="rowCard scroll-section"
           key={`row-${i}`}
         >
           {this.renderCard(
@@ -124,8 +154,36 @@ class Posts extends Component {
   render() {
     return (
       <>
-        <main className="content bodyColor">
-          <h2 className="title">INCAENRUPTIBLES</h2>
+        <main className="content bodyColor scroll-container">
+          {/* <Plx
+            className="parallax-background scroll-section"
+            parallaxData={parallaxDataBackground}
+          >
+            <div
+              style={{
+                backgroundImage: `url(${castorImage})`,
+                height: "1000px",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundAttachment: "fixed" // Optional, for a fixed background effect
+              }}
+            >
+           
+              <Plx className="parallax-title" parallaxData={parallaxDataTitle}>
+                <h2
+                  className="title"
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  INCAENRUPTIBLES
+                </h2>
+              </Plx>
+            </div>
+          </Plx> */}
           {this.renderRows()}
         </main>
       </>

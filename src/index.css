@@ -2,6 +2,7 @@
 
 :root {
   --main-bg-color: #013120;
+  --second-bg-color: #59866fd2;
   --navbar-bg-color:#94c6b0;
   --navbar-color-text:#013120;
   --navbar-hover-color:#bddbce;
@@ -36,15 +37,17 @@
 }
 
 
-
 .bodyColor {
-
-  padding: 10px 0;
-  background-color:var( --main-bg-color);
-  height: 100%;
+  background-image: url('./imgs/leaf3.jpg'); /* Replace with your image path */
+  background-color: var(--second-bg-color); /* Semi-transparent white overlay; adjust as needed */
+  background-blend-mode: overlay; /* Blend the background color with the image */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%; /* Ensure this is 100% for full height */
   flex: 1;
-
 }
+
 
 /*! -----------TEXT------------ */
 .title {
@@ -134,4 +137,33 @@ nav ul li {
   .rowCard {
     margin: 100px;
   }
+}
+
+
+
+/*! -----------PARALLAX------------ */
+
+
+.parallax-background {
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.parallax-title {
+  text-align: center;
+  color: white; /* or any color of your choice */
+  font-size: 2rem; /* adjust as needed */
+}
+
+/*! -----------SCROLL------------ */
+
+.scroll-container {
+  scroll-snap-type: y mandatory; /* Vertical scrolling */
+  overflow-y: scroll;
+  height: 100vh; /* Adjust as needed */
+}
+
+.scroll-section {
+  scroll-snap-align: start;
+  height: 100vh; /* Adjust based on your content */
 }
