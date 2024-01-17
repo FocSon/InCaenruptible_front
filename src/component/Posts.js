@@ -86,7 +86,6 @@ class Posts extends Component {
   // Function to render rows of cards
   renderRows() {
     const { listPosts } = this.state;
-    console.log(listPosts.length);
     const rowElements = [];
 
     // Grouping posts in pairs
@@ -123,7 +122,11 @@ class Posts extends Component {
   render() {
     return (
       <>
-        <main className="content bodyColor">{this.renderRows()}</main>
+        <main className="content bodyColor">
+            <h2 className="title">INCAENRUPTIBLE</h2>
+            {this.renderRows()}
+            
+        </main>
       </>
     );
   }

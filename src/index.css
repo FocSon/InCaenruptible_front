@@ -5,6 +5,7 @@
   --navbar-bg-color:#94c6b0;
   --navbar-color-text:#013120;
   --navbar-hover-color:#bddbce;
+  --title-color:#fffaee;
 }
 
 body {
@@ -15,10 +16,18 @@ body {
   background-color: rgb(0, 0, 0); 
 }
 
-/*! -----------HEADER------------ */
+/*! -----------FONT------------ */
 
 @font-face {
   font-family: 'KCObraLetraRegular';
+  src: url('./font/KCObraLetraBold.woff2') format('woff2'),
+       url('./font/KCObraLetraBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Stencil';
   src: url('./font/KCObraLetraBold.woff2') format('woff2'),
        url('./font/KCObraLetraBold.woff') format('woff');
   font-weight: normal;
@@ -36,11 +45,31 @@ body {
 .bodyColor {
 
   padding: 10px 0;
-  background-color:var(--main-bg-color);
+  background-color:var( --main-bg-color);
   height: 100%;
 
 }
 
+/*! -----------TEXT------------ */
+.title {
+
+  margin-top: 3%;
+  font-size: 50px;
+  color:var(--title-color) ;
+  text-decoration: underline;
+  font-family: 'Stencil', sans-serif;
+  text-align: center;
+
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+/*! -----------NAV------------ */
 /* Style the links */
 nav>ul>li>a {
   color: var(--navbar-color-text);
@@ -74,8 +103,7 @@ nav, nav ul, nav img, nav a, nav li {
 
 nav ul {
   display: grid; /* Use grid layout */
-  grid-template-columns: 1fr 1fr 1fr; /* Three columns, each 1 fraction of the available space */
-  justify-items: center; /* Center items horizontally in the grid cell */
+  grid-template-columns: 4fr 5fr 5fr; /* Three columns, each 1 fraction of the available space */
   align-items: center; /* Center items vertically in the grid cell */
   list-style-type: none; /* Remove default list styling */
   padding: 0;

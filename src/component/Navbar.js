@@ -15,8 +15,8 @@ function Navbar() {
 
                 <ul>
                     <li><Link to="*">Principal</Link></li>
-                    <li><Link to="/posts">Posts</Link></li>
-                    <li><Link to="/events">Evenements</Link></li>
+                    <li className='center'><Link to="/posts">Posts</Link></li>
+                    <li className='right'><Link to="/events">Evenements</Link></li>
                 </ul>
             </nav>
             <Routes>
