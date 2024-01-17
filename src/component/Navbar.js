@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
 import logo from "../imgs/logo.png";
 import Home from "./Home";
 import Posts from "./Posts";
-import Events from "./Events";
+import Events from "./Events/Events";
 
 function Navbar() {
     return (
