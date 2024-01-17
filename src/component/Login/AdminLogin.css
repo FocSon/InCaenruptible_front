@@ -7,13 +7,7 @@
 }
 
 
-@font-face {
-    font-family: 'KCObraLetraRegular';
-    src: url('../../font/KCObraLetraBold.woff2') format('woff2'),
-         url('../../font/KCObraLetraBold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
+
 
   .text-login{
     color : var( --navbar-hover-color);
