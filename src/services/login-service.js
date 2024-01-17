@@ -22,7 +22,7 @@ const login = async (username, password) => axios.post(`${API_URL}login`, {
   return res.data.errorMessage ?? 'Unknown error';
 }).catch((err) => err.response.data.errorMessage);
 
-const isLoggedIn = () => !!localStorage.getItem('token');
+const isLoggedIn = !!localStorage.getItem('token');
 
 const logout = () => {
   localStorage.removeItem('token');

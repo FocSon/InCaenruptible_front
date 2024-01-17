@@ -4,7 +4,7 @@ import logo from "../imgs/logo.png";
 import Home from "./Home";
 import Posts from "./Posts";
 import Events from "./Events";
-import AdminLogin from "./AdminLogin";
+import AdminLogin from "./Login/AdminLogin";
 
 function Navbar() {
     return (
