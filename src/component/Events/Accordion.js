@@ -20,7 +20,7 @@ function AccordionComponent({ items }) {
         {accordionItems.map((item, index) => (
           <AccordionItem key={index}>
             <h2>
-              <AccordionButton onClick={() => handleToggle(index)} _expanded={{ bg: 'tomato', color: 'white' }}>
+              <AccordionButton onClick={() => handleToggle(index)}>
                 <Box flex="1" textAlign="left">
                   {item.title}
                 </Box>
