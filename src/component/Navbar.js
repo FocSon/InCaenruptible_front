@@ -1,10 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
 import logo from "../imgs/logo.png";
-import Dashboard from "../Dashboard";
-import Posts from "../Posts";
-
-
+import Home from "./Home";
+import Posts from "./Posts";
+import Events from "./Events";
 
 function Navbar() {
     return (
@@ -19,8 +18,9 @@ function Navbar() {
                 </ul>
             </nav>
             <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="*" element={<Home />} />
                 <Route path="/posts" element={<Posts />} />
+                <Route path="/events" element={<Events />} />
             </Routes>
         </Router>
     );
