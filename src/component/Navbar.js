@@ -2,6 +2,9 @@ import React from 'react';
 import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
 import logo from "../imgs/logo.png";
 import Dashboard from "../Dashboard";
+import Posts from "../Posts";
+
+
 
 function Navbar() {
     return (
@@ -17,7 +20,7 @@ function Navbar() {
             </nav>
             <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/posts" element={<Posts />} />
             </Routes>
         </Router>
     );
