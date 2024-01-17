@@ -13,7 +13,7 @@ import castorImage from "../imgs/castor.webp";
 import sadPoussin from "../imgs/sad_poussin.jpg";
 import eauMarron from "../imgs/eau_marron.jpg";
 import deversementEau from "../imgs/deversement_eau.webp";
-import Plx from "react-plx";
+// import Plx from "react-plx";
 
 const parallaxDataBackground = [
   {
