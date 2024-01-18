@@ -3,49 +3,52 @@ import VideoPlayer from "./VideoPlayer";
 import "./Home.css";
 import Spinner from "./Spinner";
 import CreateAlertForm from "./CreateAlertForm";
-import HomeService from "../service/HomeService";
+import HomeService from '../services/home.service';
 
 const Home = () => {
   let [homeService, alert] = useState(false);
 
   homeService = new HomeService();
 
-  homeService.fetchAlertPresent().then((r) => {
-    alert = r;
-  });
+    homeService.fetchAlertPresent().then(() => {
+        if (homeService.alertPresent) {
+            // homeService.initSocket()
+            // homeService.watchAlert()
+            alert = homeService.currentAlert;
+        }
+    });
 
-  return (
-    <div className="content bodyColor">
-      {alert.length && alert.endTime < Date.now() ? (
-        <div>
-          <VideoPlayer
-            length={40}
-            url="https://www.youtube.com/watch?v=Rq5SEhs9lws&ab_channel=Skillthrive"
-          />
-          <h1>Titre</h1>
-          <h4>
-            Lorem ipsum 
-          </h4>
-        </div>
-      ) : (
-        ""
-      )}
-      <div className="alertButton">
-        {homeService.alertAwaitingConfirmation ? (
-          <Spinner text="Awaiting stream validation, don't leave the page ...." />
-        ) : (
-          <div>
-            <CreateAlertForm homeService={homeService} />
-            <div className="video">
-            <video id="webcamVideo" width="640" height="480" autoPlay></video>
-              
-           
+    return (
+        <div className="content bodyColor">
+            {alert.length && alert.endTime < Date.now() ? (
+                <div>
+                    <VideoPlayer
+                        length={40}
+                        url="https://www.youtube.com/watch?v=Rq5SEhs9lws&ab_channel=Skillthrive"
+                    />
+                    <h1>Titre</h1>
+                    <h4>
+                        Lorem ipsum
+                    </h4>
+                </div>
+            ) : (
+                ''
+            )}
+            <div className="alertButton">
+                {homeService.alertAwaitingConfirmation ? (
+                    <Spinner text="Awaiting stream validation, don't leave the page ...."/>
+                ) : (
+                    <div>
+                        <CreateAlertForm homeService={homeService}/>
+                        <div className="video">
+                            <video id="webcamVideo" width="640" height="480" autoPlay></video>
+                            <video id="remoteVideo" width="640" height="480" autoPlay></video>
+                        </div>
+                    </div>
+                )}
             </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default Home;
