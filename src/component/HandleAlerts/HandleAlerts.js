@@ -1,6 +1,6 @@
 import React from 'react';
 import './HandleAlerts.css'
-import loginService from '../../services/login-service';
+import loginService from '../../services/login.service';
 
 const HandleAlerts = () => {
 
