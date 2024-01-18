@@ -1,6 +1,6 @@
 import RequestAlert from '../model/RequestAlert';
 import Cookies from 'js-cookie';
-import {io} from '../sockets';
+import {socket} from '../sockets';
 
 class HomeService {
     alertAwaitingConfirmation = false;
@@ -20,7 +20,6 @@ class HomeService {
                 const video = document.getElementById('webcamVideo');
                 video.srcObject = stream;
 
-                const socket = io('ws://192.93.212.217:8080/');
                 this.registerSocketEvents(socket);
                 socket.emit('streamData', {
                     data: undefined,

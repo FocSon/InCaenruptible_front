@@ -11,6 +11,9 @@ function Navbar() {
                 <li><Link to="*">Principal</Link></li>
                 <li className="center"><Link to="/posts">Posts</Link></li>
                 <li className="right"><Link to="/events">Evenements</Link></li>
+                {window.localStorage.getItem('token') !== null
+                    && <li className="right"><Link to="/handle-alerts">Manager</Link></li>
+                }
             </ul>
         </nav>
     );
