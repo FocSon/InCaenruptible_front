@@ -1,9 +1,12 @@
-// src/components/Accordion.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Box } from '@chakra-ui/react';
 
 function AccordionComponent({ items }) {
-  const [accordionItems, setAccordionItems] = useState(items || []);
+  const [accordionItems, setAccordionItems] = useState([]);
+
+  useEffect(() => {
+    setAccordionItems(items);
+  }, [items]);
 
   const handleToggle = (index) => {
     setAccordionItems((prevItems) => {
@@ -16,11 +19,11 @@ function AccordionComponent({ items }) {
   return (
     <Box p={5}>
       <h1>Fil des alertes</h1>
-      <Accordion allowToggle>
+      <Accordion>
         {accordionItems.map((item, index) => (
           <AccordionItem key={index}>
             <h2>
-              <AccordionButton onClick={() => handleToggle(index)} _expanded={{ bg: 'tomato', color: 'white' }}>
+              <AccordionButton onClick={() => handleToggle(index)} _expanded={{ bg: "gray.100" }}>
                 <Box flex="1" textAlign="left">
                   {item.title}
                 </Box>

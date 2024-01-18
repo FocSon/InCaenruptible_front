@@ -106,28 +106,28 @@ nav, nav ul, nav img, nav a, nav li {
 }
 
 .navbar-logo {
-  height: 8vh; 
+  height: 8vh;
   margin-right: 0;
 }
 
 /* nav ul {
-  display: grid; 
-  grid-template-columns: 4fr 5fr 5fr; 
-  align-items: center; 
-  list-style-type: none; 
+  display: grid;
+  grid-template-columns: 4fr 5fr 5fr;
+  align-items: center;
+  list-style-type: none;
   padding: 0;
   margin: 0;
-  height: 100%; 
+  height: 100%;
   width: 100%;
 } */
 
 nav ul {
-  display: flex; 
-  align-items: center; 
-  list-style-type: none; 
+  display: flex;
+  align-items: center;
+  list-style-type: none;
   padding: 0;
   margin-left: 10px;
-  height: 100%; 
+  height: 100%;
   width: 100%;
 }
 
@@ -139,7 +139,7 @@ nav ul li {
 /*! -----------CARD------------ */
 
 .rowCard{
-  
+
 }
 
 /* Apply styles for medium screens and up */
