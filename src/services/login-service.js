@@ -29,10 +29,8 @@ const logout = () => {
   window.location.reload();
 };
 
-const funct = {
+export default {
     login,
     isLoggedIn,
     logout,
 };
-
-export default funct;
