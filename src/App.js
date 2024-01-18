@@ -44,7 +44,7 @@ function App() {
                     <Route path="/admin-login" element={<AdminLogin/>}/>
                     <Route path="/handle-alerts" element={<HandleAlerts/>}/>
                 </Routes>
-            </Router> //it is not required to have a login button as only the admin will use it
+            </Router>
         </>
     );
 }
