@@ -21,14 +21,12 @@ function App() {
                         margin: 0;
                         padding: 0;
                         height: 100%; /* Full height */
-                        width: 100%; /* Full width */
-                        display: flex;
-                        flex-direction: column;
+                        
                         background-color: var(--main-bg-color);
                     }
 
                     #root {
-                        height: 100%; /* Full height */
+                        min-height: 100%; /* Full height */
                         display: flex;
                         flex-direction: column;
                     }

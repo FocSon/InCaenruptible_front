@@ -24,6 +24,7 @@ function FilterComponent({ onFilterChange }) {
       <Stack
         spacing={[1, 5]}
         direction={["column", "row"]}
+        wrap="wrap"
         value={selectedFilters}
         className="filter"
       >

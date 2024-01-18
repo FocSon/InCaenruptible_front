@@ -56,11 +56,12 @@
   justify-content: center;
   align-items: center;
   height: 100%; /* Make sure parent has a defined height */
+  margin:10%;
 }
 
 .title {
 
-  margin-top: -10%;
+  
   font-size: 50px;
   color:var(--title-color) ;
   text-decoration: underline;
@@ -86,6 +87,12 @@
   color:var(--title-color) ;
   text-decoration:none;
   font-family: 'Stencil', sans-serif;
+  padding:5px 8px 5px 8px;
+  border-radius: 15px;
+}
+
+.filterText:hover {
+  background-color: rgb(38, 36, 36);
 }
 
 .accordionButtonText{
@@ -115,6 +122,10 @@
   text-align: center;
 }
 
+.footer-posts {
+  padding-bottom: 5%;
+}
+
 
 .right {
   text-align: right;
@@ -126,7 +137,7 @@
 
 /*! -----------NAV------------ */
 /* Style the links */
-nav>ul>li>a {
+.link {
   color: var(--navbar-color-text);
   font-size: 23px;
   font-family: 'Impact', sans-serif;
@@ -135,8 +146,12 @@ nav>ul>li>a {
   border-radius: 7px; /* Rounded corners */
 }
 
+.menuD {
+  margin-left: 4%;
+}
+
 /* Style the links on hover */
-nav>ul>li>a:hover {
+.link:hover {
   background-color: var(--navbar-hover-color); /* Change color on hover */
 }
 
@@ -185,31 +200,12 @@ nav ul li {
 /*! -----------CARD------------ */
 
 .rowCard{
-
-}
-
-/* Apply styles for medium screens and up */
-@media screen and (min-width: 48em) { /* 48em is equivalent to 768px */
-  .rowCard {
-    margin: 100px;
-  }
+  height: 100%;
+  margin-bottom: 5%;
 }
 
 
 
-/*! -----------PARALLAX------------ */
-
-
-.parallax-background {
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-.parallax-title {
-  text-align: center;
-  color: white; /* or any color of your choice */
-  font-size: 2rem; /* adjust as needed */
-}
 
 /*! -----------SCROLL------------ */
 
@@ -222,4 +218,23 @@ nav ul li {
 .scroll-section {
   scroll-snap-align: start;
   height: 100vh; /* Adjust based on your content */
+}
+
+
+.scroll-section-sm {
+  scroll-snap-align: start;
+  height: 100vh; /* Adjust based on your content */
+}
+
+@media (max-width: 400px) {
+  .scroll-section-sm {
+    scroll-snap-align: start;
+    height: 100vh; /* Adjust based on your content */
+  }
+}
+
+@media (max-width: 400px) { /* Example breakpoint */
+  .scroll-section {
+    height: 40vh; /* Adjust height for smaller screens */
+  }
 }

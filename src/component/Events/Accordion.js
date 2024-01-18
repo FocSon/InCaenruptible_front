@@ -51,7 +51,7 @@ function AccordionComponent({ items }) {
                 switch (item.type) {
                   case "video":
                     return (
-                      <video width="auto" height="auto" controls>
+                      <video width="200" height="auto" controls>
                         <source src={item.link}></source>
                         Your browser does not support the video tag.
                       </video>
