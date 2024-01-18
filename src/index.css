@@ -50,14 +50,24 @@
 
 
 /*! -----------TEXT------------ */
+
+.parent-of-title { /* Replace with the actual parent class or element */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Make sure parent has a defined height */
+}
+
 .title {
 
-  margin-top: 3%;
+  margin-top: -10%;
   font-size: 50px;
   color:var(--title-color) ;
   text-decoration: underline;
   font-family: 'Stencil', sans-serif;
+  display: block;
   text-align: center;
+  align-items: center;
 
 }
 

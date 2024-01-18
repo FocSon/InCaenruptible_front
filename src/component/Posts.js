@@ -15,33 +15,33 @@ import eauMarron from "../imgs/eau_marron.jpg";
 import deversementEau from "../imgs/deversement_eau.webp";
 // import Plx from "react-plx";
 
-const parallaxDataBackground = [
-  {
-    start: "self",
-    duration: 3000,
-    properties: [
-      {
-        startValue: 0,
-        endValue: -500,
-        property: "translateY",
-      },
-    ],
-  },
-];
+// const parallaxDataBackground = [
+//   {
+//     start: "self",
+//     duration: 3000,
+//     properties: [
+//       {
+//         startValue: 0,
+//         endValue: -500,
+//         property: "translateY",
+//       },
+//     ],
+//   },
+// ];
 
-const parallaxDataTitle = [
-  {
-    start: "self",
-    duration: 150,
-    properties: [
-      {
-        startValue: 1,
-        endValue: 0,
-        property: "opacity",
-      },
-    ],
-  },
-];
+// const parallaxDataTitle = [
+//   {
+//     start: "self",
+//     duration: 150,
+//     properties: [
+//       {
+//         startValue: 1,
+//         endValue: 0,
+//         property: "opacity",
+//       },
+//     ],
+//   },
+// ];
 
 class Posts extends Component {
   constructor(props) {
@@ -184,6 +184,9 @@ class Posts extends Component {
               </Plx>
             </div>
           </Plx> */}
+          <div className="parent-of-title scroll-section">
+          <h2 className="title">INCAENRUPTIBLES</h2>
+          </div>
           {this.renderRows()}
         </main>
       </>
