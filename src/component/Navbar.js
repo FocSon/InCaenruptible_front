@@ -16,6 +16,9 @@ function Navbar() {
                     <li><Link className='link' to="*">Principal</Link></li>
                     <li><Link className='link' to="/posts">Posts</Link></li>
                     <li><Link  className='link'to="/events">Evenements</Link></li>
+                    {window.localStorage.getItem('token') !== null
+                    && <li><Link className='link' to="/handle-alerts">Manager</Link></li>
+                }
                 </ul>
             </Box>
 
@@ -25,6 +28,9 @@ function Navbar() {
                     <MenuItem as={Link} to="*">Principal</MenuItem>
                     <MenuItem as={Link} to="/posts">Posts</MenuItem>
                     <MenuItem as={Link} to="/events">Evenements</MenuItem>
+                    {window.localStorage.getItem('token') !== null
+                    &&  <MenuItem as={Link} to="/handle-alerts">Manager</MenuItem> 
+                }
                 </MenuList>
             </Menu>
         </Box>

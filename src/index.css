@@ -91,6 +91,15 @@
   border-radius: 15px;
 }
 
+.filterText2 {
+  color:var(--title-color) ;
+  text-decoration:none;
+  font-family: 'Stencil', sans-serif;
+  padding:5px 8px 5px 8px;
+  border-radius: 15px;
+}
+
+
 .filterText:hover {
   background-color: rgb(38, 36, 36);
 }

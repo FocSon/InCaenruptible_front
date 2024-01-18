@@ -42,7 +42,7 @@ function App() {
                     <Route path="/admin-login" element={<AdminLogin/>}/>
                     <Route path="/handle-alerts" element={<HandleAlerts/>}/>
                 </Routes>
-            </Router> 
+            </Router>
         </>
     );
 }

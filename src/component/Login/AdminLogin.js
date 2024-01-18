@@ -24,13 +24,13 @@ const AdminLogin = () => {
                 <form onSubmit={handleSubmit}>
                     <VStack spacing={4}>
                         <FormControl id="username" isRequired>
-                            <FormLabel className='filterText'>Nom d'utilisateur</FormLabel>
-                            <Input  className='filterText' type="text" placeholder="Nom d'utilisateur" 
+                            <FormLabel className='filterText2'>Nom d'utilisateur</FormLabel>
+                            <Input  className='filterText2' type="text" placeholder="Nom d'utilisateur" 
                                    value={username} onChange={(e) => setUsername(e.target.value)} />
                         </FormControl>
                         <FormControl id="password" isRequired>
-                            <FormLabel className='filterText'>Mot de Passe</FormLabel>
-                            <Input  className='filterText' type="password" placeholder="Mot de Passe" 
+                            <FormLabel className='filterText2'>Mot de Passe</FormLabel>
+                            <Input  className='filterText2' type="password" placeholder="Mot de Passe" 
                                    value={password} onChange={(e) => setPassword(e.target.value)} />
                         </FormControl>
                         <Button type="submit" colorScheme="blue" className='button-login'>Connexion</Button>
