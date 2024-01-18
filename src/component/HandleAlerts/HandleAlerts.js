@@ -1,6 +1,6 @@
 import React from 'react';
 import './HandleAlerts.css'
-import loginService from '../../services/login-service';
+import loginService from '../../services/login.service';
 import { io } from "https://cdn.socket.io/4.7.4/socket.io.esm.min.js";
 
 const HandleAlerts = () => {
