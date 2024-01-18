@@ -8,8 +8,6 @@ const VideoPlayer = (properties) => {
     const paddingTop  = 56.25 * (length/100);   // Keep the ration 18:9
     const margin = (100-length)/2;
 
-    console.log(url)
-
     const playerWrapperStyle = {
         position: 'relative',
         paddingTop: `${paddingTop}%`, /* Player ratio */
