@@ -1,5 +1,6 @@
 import {useMemo, useState} from 'react';
 import CreateAlertForm from './CreateAlertForm';
+import './Home.css';
 
 const Home = () => {
     const [alerts, setAlerts] = useState([]);
@@ -11,6 +12,7 @@ const Home = () => {
 
     return (
         <>
+         <main className="content bodyColor ">
             {
                 mainAlert ? (
                     <div>
@@ -25,6 +27,8 @@ const Home = () => {
             <div className="alertButton">
                 <CreateAlertForm/>
             </div>
+
+            </main>
         </>
     );
 };

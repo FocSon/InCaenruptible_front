@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Button, FormControl, FormLabel, Input, Box, Heading, VStack } from '@chakra-ui/react';
 import './AdminLogin.css';
+
 import loginService from '../../services/login.service';
 
 const AdminLogin = () => {
-    const handlesubmit = async (event) => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const usern = document.getElementById('username').value;
-        const pwd = document.getElementById('password').value;
-        await loginService.login(usern, pwd);
+        await loginService.login(username, password);
     };
 
     const logoutCall = () => {
@@ -16,26 +19,36 @@ const AdminLogin = () => {
 
     if (loginService.isLoggedIn === false) {
         return (
-            <form className="login-form" onSubmit={handlesubmit}>
-                <input type="text" placeholder="Username" id="username" required/>
-                <input type="password" placeholder="Password" id="password" required/>
-                <button type="submit">Login</button>
-            </form>
+            <main className='bodyColor'>
+            <Box p={4}>
+                <form onSubmit={handleSubmit}>
+                    <VStack spacing={4}>
+                        <FormControl id="username" isRequired>
+                            <FormLabel className='filterText2'>Nom d'utilisateur</FormLabel>
+                            <Input  className='filterText2' type="text" placeholder="Nom d'utilisateur" 
+                                   value={username} onChange={(e) => setUsername(e.target.value)} />
+                        </FormControl>
+                        <FormControl id="password" isRequired>
+                            <FormLabel className='filterText2'>Mot de Passe</FormLabel>
+                            <Input  className='filterText2' type="password" placeholder="Mot de Passe" 
+                                   value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </FormControl>
+                        <Button type="submit" colorScheme="blue" className='button-login'>Connexion</Button>
+                    </VStack>
+                </form>
+            </Box>
+        </main>
         );
     } else {
         return (
-            <div>
-                 <div className="logout-text">
-                    <h2 className='text-logged-in'>You are logged in</h2>
-                </div>
-                <div className="logout-text">
-                    <button className='button-logout' onClick={logoutCall}>logout</button>    
-                </div>
-            </div>
-           
+            <main className='content center-logout bodyColor'>
+            <Box p={4}>
+                <Heading as="h2" size="lg" mb={4} className='logout-text'>Vous êtes connecté</Heading>
+                <Button colorScheme="red" className="button-logout" onClick={logoutCall}>Deconnexion</Button>
+            </Box>
+            </main>
         );
     }
-
 };
 
 export default AdminLogin;

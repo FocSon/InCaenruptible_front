@@ -1,21 +1,39 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Box, Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
 import logo from '../imgs/logo.png';
 
 function Navbar() {
     return (
-        <nav>
-            <img src={logo} alt="Logo" className="navbar-logo"/>
+        <Box as="nav" display="flex" justifyContent="left" alignItems="center" p={4}>
+            <Box>
+                <img src={logo} alt="Logo" className='navbar-logo' />
+            </Box>
 
-            <ul>
-                <li><Link to="*">Principal</Link></li>
-                <li className="center"><Link to="/posts">Posts</Link></li>
-                <li className="right"><Link to="/events">Evenements</Link></li>
-                {window.localStorage.getItem('token') !== null
-                    && <li className="right"><Link to="/handle-alerts">Manager</Link></li>
+            <Box display={{ base: 'none', md: 'block' }}>
+                <ul>
+                    <li><Link className='link' to="*">Principal</Link></li>
+                    <li><Link className='link' to="/posts">Posts</Link></li>
+                    <li><Link  className='link'to="/events">Evenements</Link></li>
+                    {window.localStorage.getItem('token') !== null
+                    && <li><Link className='link' to="/handle-alerts">Manager</Link></li>
                 }
-            </ul>
-        </nav>
+                </ul>
+            </Box>
+
+            <Menu>
+                <MenuButton as={IconButton} icon={<HamburgerIcon />} className='menuD' display={{ base: 'block', md: 'none' }} />
+                <MenuList>
+                    <MenuItem as={Link} to="*">Principal</MenuItem>
+                    <MenuItem as={Link} to="/posts">Posts</MenuItem>
+                    <MenuItem as={Link} to="/events">Evenements</MenuItem>
+                    {window.localStorage.getItem('token') !== null
+                    &&  <MenuItem as={Link} to="/handle-alerts">Manager</MenuItem> 
+                }
+                </MenuList>
+            </Menu>
+        </Box>
     );
 }
 

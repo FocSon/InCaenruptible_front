@@ -27,15 +27,31 @@ const outline = definePartsStyle((props) => {
       borderColor: "gray.100",
     },
     button: {
+      border: "2px solid",
+      marginTop:"5px",
+      borderColor: "#fffaee",
+      backgroundColor:"#465a48c0",
       color: "gray.500",
       _hover: {
-        color: "gray.600",
+        backgroundColor:"#566c58",
+        color: "white",
+        transform: "scale(1.02)",
       },
       _focus: {
+        backgroundColor:"#566c58",
         color: "blue.500",
+      },
+      _expanded:{
+        backgroundColor:"#9fb0a1c0",
+        color: "black",
       },
       fontFamily: "mono",
     },
+    panel:{
+      backgroundColor:"#fffaeea0",
+      padding:"10px",
+      justifyItems:"center",
+    }
   };
 });
 
