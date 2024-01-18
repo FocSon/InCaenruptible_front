@@ -5,6 +5,7 @@ import Posts from "./Posts";
 import AdminLogin from "./Login/AdminLogin";
 import Events from "./Events/Events";
 import Home from "./Home";
+import HandleAlerts from './HandleAlerts/HandleAlerts';
 
 function Navbar() {
     return (
@@ -23,6 +24,7 @@ function Navbar() {
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/admin-login" element={<AdminLogin />} />
+                <Route path="/handle-alerts" element={<HandleAlerts/>}/>
             </Routes>
         </Router> //it is not required to have a login button as only the admin will use it
     );

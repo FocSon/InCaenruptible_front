@@ -25,13 +25,27 @@ function AccordionComponent({ items }) {
             <h2>
               <AccordionButton onClick={() => handleToggle(index)} _expanded={{ bg: "gray.100" }}>
                 <Box flex="1" textAlign="left">
-                  {item.title}
+                  {item.title + " | categorie : "+ item.category + " | type : " + item.type}
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
               <p>{item.content}</p>
+              {(() => {
+                switch (item.type) {
+                  case 'video':
+                    return <video width="200" height="100" controls>
+                              <source src={item.link}></source>
+                              Your browser does not support the video tag.
+                          </video>;
+                  case 'photo':
+                    return <img src={item.link} width="200" height="100"></img>;
+                  // Add more cases as needed
+                  default:
+                    return null;
+                }
+              })()}
             </AccordionPanel>
           </AccordionItem>
         ))}
