@@ -1,6 +1,6 @@
 .alertButton{
     padding-top: 10%;
-    display: flex;
+    display: block;
     text-align: center;
     align-content: center;
     justify-content: center;
@@ -8,5 +8,6 @@
 }
 
 .video {
+    
 height: 100%;
 }

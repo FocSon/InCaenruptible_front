@@ -24,13 +24,7 @@ const Home = () => {
           />
           <h1>Titre</h1>
           <h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh sit
-            amet commodo nulla facilisi. Donec adipiscing tristique risus nec
-            feugiat in. Turpis egestas pretium aenean pharetra magna ac
-            placerat. Egestas sed sed risus pretium. Sagittis aliquam malesuada
-            bibendum arcu vitae elementum curabitur vitae nunc. Urna molestie at
-            elementum eu.
+            Lorem ipsum 
           </h4>
         </div>
       ) : (
@@ -42,7 +36,11 @@ const Home = () => {
         ) : (
           <div>
             <CreateAlertForm homeService={homeService} />
-            
+            <div className="video">
+            <video id="webcamVideo" width="640" height="480" autoPlay></video>
+              
+           
+            </div>
           </div>
         )}
       </div>
