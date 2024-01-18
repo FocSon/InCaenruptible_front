@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import './CreateAlertForm.css';
-import {createAlert} from "../service/HomeService";
 
 function CreateAlertForm(properties) {
-    const {customCallback} = properties;
+    const {homeService} = properties;
 
     const [formData, setFormData] = useState({
-        type: 'stream',
+        type: 'video',
         category: 'city',
         title: '',
         description: '',
@@ -21,21 +20,13 @@ function CreateAlertForm(properties) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form submitted with data:', formData);
 
         if(formData.title !== '' || formData.description !== '') {
-            createAlert(formData.type, formData.category, formData.title, formData.description).then((result) => {
-
-                if(customCallback) {
-                    console.log(result);
-                    customCallback(result);
-                }
-            });
-
+            homeService.createAlert(formData.type, formData.category, formData.title, formData.description).then(r => {})
         }
 
         setFormData({
-            type: 'stream',
+            type: 'video',
             category: 'city',
             title: '',
             description: '',
@@ -46,16 +37,16 @@ function CreateAlertForm(properties) {
         <div className="Home">
             <form onSubmit={handleSubmit}>
                 <div className="form-entry">
-                    <label for="type">Type</label>
+                    <label htmlFor="type">Type</label>
                     <select name="type" onChange={handleChange} value={formData.type} className="entry">
-                        <option value="stream">Live stream</option>
+                        <option value="video">Video</option>
                         <option value="co2">CO2 level</option>
                         <option value="sound">Sound level</option>
                     </select>
                 </div>
 
                 <div className="form-entry">
-                    <label for="category">Type</label>
+                    <label htmlFor="category">Type</label>
                     <select name="category" onChange={handleChange} value={formData.category}
                             className="entry">
                         <option value="city">City</option>
@@ -65,7 +56,7 @@ function CreateAlertForm(properties) {
                 </div>
 
                 <div className="form-entry">
-                    <label for="title">Title</label>
+                    <label htmlFor="title">Title</label>
                     <input className="entry" onChange={handleChange} value={formData.title}
                            name="title"></input>
                 </div>
