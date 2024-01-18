@@ -14,7 +14,7 @@ export const requestAlert = async (title, description, type, category) => axios.
             token,
         };
     }
-    return res.data.errorMessage ?? 'Unknown error';
+    return res.data;
 }).catch((err) => err.response.data.errorMessage);
 
 export const getAlertsDone = async () => axios.get(`${API_URL}alertsDone`)
