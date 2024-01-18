@@ -87,8 +87,6 @@ const Event = () => {
   
       return filteredItems;
     });
-
-    console.log(selectedFilters);
   
     function doIDisplay(item) {
       if (item.type === 'video') {
