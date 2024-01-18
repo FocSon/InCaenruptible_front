@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-import VideoPlayer from './VideoPlayer';
-import './Home.css';
-import Spinner from './Spinner';
-import CreateAlertForm from './CreateAlertForm';
-import HomeService from '../service/HomeService';
+import React, { useState } from "react";
+import VideoPlayer from "./VideoPlayer";
+import "./Home.css";
+import Spinner from "./Spinner";
+import CreateAlertForm from "./CreateAlertForm";
+import HomeService from '../services/home.service';
 
 const Home = () => {
-    let [homeService, alert] = useState(false);
+  let [homeService, alert] = useState(false);
 
-    homeService = new HomeService();
+  homeService = new HomeService();
 
     homeService.fetchAlertPresent().then(() => {
         if (homeService.alertPresent) {
