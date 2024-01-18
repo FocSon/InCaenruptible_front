@@ -10,18 +10,22 @@ const Home = () => {
 
     homeService = new HomeService();
 
-    homeService.fetchAlertPresent().then(r => {
-        alert = r;
+    homeService.fetchAlertPresent().then(() => {
+        if(homeService.alertPresent) {
+            homeService.initSocket()
+            homeService.watchAlert()
+            alert = homeService.currentAlert;
+        }
     });
-
 
     return (
         <div className="Home">
             {
-                alert.length && alert.endTime < Date.now() ?
+                homeService.alertPresent && alert.endTime < Date.now() ?
                     <div>
-                        <VideoPlayer length={40}
-                                     url="https://www.youtube.com/watch?v=Rq5SEhs9lws&ab_channel=Skillthrive"/>
+                        <video id="remoteVideo" width="640" height="480" autoPlay></video>
+                        {/*<VideoPlayer length={40}*/}
+                        {/*             url="https://www.youtube.com/watch?v=Rq5SEhs9lws&ab_channel=Skillthrive"/>*/}
                         <h1>Titre</h1>
                         <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore
@@ -41,7 +45,6 @@ const Home = () => {
                                 <div>
                                     <CreateAlertForm homeService={homeService}/>
                                     <video id="webcamVideo" width="640" height="480" autoPlay></video>
-                                    <video id="remoteVideo" width="640" height="480" autoPlay></video>
                                 </div>
                         }
                     </div>
