@@ -12,8 +12,8 @@ const Home = () => {
 
     homeService.fetchAlertPresent().then(() => {
         if(homeService.alertPresent) {
-            homeService.initSocket()
-            homeService.watchAlert()
+            // homeService.initSocket()
+            // homeService.watchAlert()
             alert = homeService.currentAlert;
         }
     });
@@ -45,6 +45,7 @@ const Home = () => {
                                 <div>
                                     <CreateAlertForm homeService={homeService}/>
                                     <video id="webcamVideo" width="640" height="480" autoPlay></video>
+                                    <video id="remoteVideo" width="640" height="480" autoPlay></video>
                                 </div>
                         }
                     </div>

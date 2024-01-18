@@ -27,15 +27,15 @@ class HomeService {
 
         const resJson = await response.json();
 
-        console.log(resJson);
+        let alerts = resJson.listAlert;
 
-        this.alertPresent = resJson.listAlert.length > 0;
-        this.currentAlert = this.alertPresent ? resJson.listAlert[resJson.listsAlert.length - 1] : undefined;
-        console.log(this.currentAlert)
+        alerts.filter((x) => x.category === 'video')
+        this.alertPresent = alerts.length > 0;
+        this.currentAlert = this.alertPresent ? alerts[0] : undefined;
     }
 
     launchWebSocketStream() {
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
+        navigator.mediaDevices.getUserMedia({ video: {width:640, height:480}, audio: true }).then((stream) => {
             const video = document.getElementById('webcamVideo');
             video.srcObject = stream;
 
@@ -49,32 +49,35 @@ class HomeService {
                 token: Cookies.get('token'),
             });
 
-            let mediaRecorder = new MediaRecorder(stream, {
-                mimeType: 'video/webm; codecs=vp9',
-            });
+            let mimeType = "video/webm; codecs=vp9"; // Default MIME type
+            if (!MediaRecorder.isTypeSupported(mimeType)) {
+                mimeType = "video/mp4; codecs=avc1"; // Fallback MIME type
+                if (!MediaRecorder.isTypeSupported(mimeType)) {
+                    console.error("No supported MIME type found for MediaRecorder");
+                    return;
+                }
+            }
 
-            mediaRecorder.start(1000);
 
-            mediaRecorder.ondataavailable = (event) => {
+            const mediaRecorderConsumer = (event) => {
                 if (event.data.size > 100000) {
                     this.socket.emit('streamData', {
                         data: event.data,
                         token: Cookies.get('token'),
                     });
-
-                    mediaRecorder.stop();
-
-                    const callback = mediaRecorder.ondataavailable;
-
-                    mediaRecorder = new MediaRecorder(stream, {
-                        mimeType: 'video/webm; codecs=vp9',
-                    });
-
-                    mediaRecorder.start(1000);
-
-                    mediaRecorder.ondataavailable = callback;
                 }
             };
+
+            setInterval(() => {
+                let mediaRecorder = new MediaRecorder(stream, { mimeType });
+
+                mediaRecorder.start(2000);
+
+                mediaRecorder.ondataavailable = (event) => {
+                    mediaRecorderConsumer(event);
+                    mediaRecorder.stop();
+                }
+            }, 2000);
         });
     }
 
@@ -98,7 +101,7 @@ class HomeService {
             Cookies.set('token', event.token, { expires: 1 * 24 * 60 * 60});
             this.alertConfirmed = true;
 
-            that.currentAlert = new Alert(event.alertId);
+            that.currentAlert.id = event.alertId;
 
             that.watchAlert(that, that.socket, event.alertId);
         });
@@ -107,8 +110,8 @@ class HomeService {
     watchAlert(that = this, socket = that.socket, alertId = that.currentAlert.id) {
         socket.emit('watchAlert', { id: alertId });
 
-        socket.on(`streamData`, function (event) {
-            console.log(event);
+        socket.on(`streamAlertData`, function (event) {
+            console.log(event)
 
             const blob = new Blob([event.data], { type: 'video/webm; codecs=vp9' });
             const url = URL.createObjectURL(blob);
@@ -153,6 +156,8 @@ class HomeService {
             console.log("Error while opening websocket");
             this.alertAwaitingConfirmation = false;
         }
+
+        this.currentAlert = new Alert(-1, type, category, title, description)
     }
 
     initSocket() {
