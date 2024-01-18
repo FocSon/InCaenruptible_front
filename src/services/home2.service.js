@@ -1,10 +1,7 @@
-import RequestAlert from '../model/RequestAlert';
 import Cookies from 'js-cookie';
-import {io} from '../sockets';
-import * as alertService from "./alert.service";
-import {getAlertsDone} from "./alert.service";
-import {API_URL, WS_URL} from './path';
-import {Alert} from "../model/Alert";
+vimport * as alertService from './alert.service';
+import {WS_URL} from './path';
+import {Alert} from '../model/Alert';
 
 class HomeService {
     alertAwaitingConfirmation = false;
@@ -39,12 +36,12 @@ class HomeService {
     async fetchAlertPresent() {
         let alerts = (await alertService.getAlertsDone()).listAlert;
 
-        console.log(alerts)
+        console.log(alerts);
 
-        alerts.filter((x) => x.category === 'video')
+        alerts.filter((x) => x.category === 'video');
         this.setAlertPresent(alerts.length > 0);
 
-        if(this.alertPresent) {
+        if (this.alertPresent) {
             this.currentAlert = this.alertPresent ? alerts[0] : undefined;
 
             this.initSocket();
@@ -61,19 +58,18 @@ class HomeService {
     }
 
     launchWebSocketStream() {
-        console.log("streaming")
+        console.log('streaming');
         navigator.mediaDevices
             .getUserMedia({video: {width: 640, height: 480}, audio: true})
             .then((stream) => {
                 const video = document.getElementById('webcamVideo');
                 video.srcObject = stream;
 
-                if(this.socket === undefined)
-                {
+                if (this.socket === undefined) {
                     this.initSocket();
                 }
 
-                console.log(Cookies.get('token'))
+                console.log(Cookies.get('token'));
 
                 this.socket.emit('streamData', {
                     data: undefined,
@@ -98,16 +94,16 @@ class HomeService {
                 };
 
                 setInterval(() => {
-                    let mediaRecorder = new MediaRecorder(stream, { mimeType });
+                    let mediaRecorder = new MediaRecorder(stream, {mimeType});
 
                     mediaRecorder.start(2000);
 
                     mediaRecorder.ondataavailable = (event) => {
                         mediaRecorderConsumer(event);
                         mediaRecorder.stop();
-                    }
+                    };
                 }, 1950);
-        });
+            });
     }
 
     registerSocketEvents(socket) {
@@ -128,7 +124,7 @@ class HomeService {
         socket.on('emitter:alertAccepted', function (event) {
             console.log('Stream accepté');
 
-            Cookies.set('token', event.token, { expires: 1 * 24 * 60 * 60});
+            Cookies.set('token', event.token, {expires: 1 * 24 * 60 * 60});
             that.setAlertConfirmed(true);
 
             that.currentAlert.id = event.alertId;
@@ -138,14 +134,14 @@ class HomeService {
     }
 
     watchAlert(that = this, socket = that.socket, alertId = that.currentAlert.id) {
-        socket.emit('watchAlert', { id: alertId });
+        socket.emit('watchAlert', {id: alertId});
 
         socket.on(`streamAlertData`, function (event) {
-            console.log(event)
+            console.log(event);
 
             const video = document.getElementById('remoteVideo');
 
-            if(video) {
+            if (video) {
                 const blob = new Blob([event.data], {type: 'video/webm; codecs=vp9'});
                 const url = URL.createObjectURL(blob);
                 video.src = url;

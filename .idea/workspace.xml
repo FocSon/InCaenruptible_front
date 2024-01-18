@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f99256a7-e80f-43b0-8480-2e577ec65b6d" name="Changes" comment="ws">
+    <list default="true" id="f99256a7-e80f-43b0-8480-2e577ec65b6d" name="Changes" comment="Request manager">
+      <change afterPath="$PROJECT_DIR$/src/component/Broadcast.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/Home2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/CreateAlertForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/CreateAlertForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/home.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/home.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/home.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/home2.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,21 +44,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Antoine",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Antoine&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/chokearth/Documents/cours/ing/3a/intensif/InCaenruptible_front/src/component&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/component" />
+      <recent name="$PROJECT_DIR$/src/services" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/services" />
     </key>
@@ -83,6 +92,9 @@
       <option name="presentableId" value="Default" />
       <updated>1705581004687</updated>
       <workItem from="1705581006689" duration="4736000" />
+      <workItem from="1705600266697" duration="436000" />
+      <workItem from="1705600719573" duration="143000" />
+      <workItem from="1705600871951" duration="1613000" />
     </task>
     <task id="LOCAL-00001" summary="Fix login form reload and switch server path to vps">
       <option name="closed" value="true" />
