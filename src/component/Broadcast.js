@@ -60,7 +60,6 @@ const Broadcast = () => {
         });
 
         socket.on('emitter:alertDone', function (event) {
-            alert('Done');
             handleStopBroadcast();
         });
 

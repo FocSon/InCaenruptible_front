@@ -2,13 +2,13 @@ import React, {useEffect} from 'react';
 import './HandleAlerts.css';
 import loginService from '../../services/login.service';
 import {socket} from '../../sockets';
-import {acceptRequest, deleteAlert, endAlert, refuseRequest} from '../../services/admin.service';
+import {acceptRequest, deleteAlert, endAlert, refuseRequest, setMainAlert} from '../../services/admin.service';
 import {background} from '@chakra-ui/styled-system';
 
 const HandleAlerts = () => {
     const [requests, setRequests] = React.useState([]);
     const [alerts, setAlerts] = React.useState([]);
-    const [mainAlertId, setMainAlertId] = React.useState(null);
+    const [mainId, setMainId] = React.useState(null);
 
     useEffect(() => { // Call once when component is mounted
         if (loginService.isLoggedIn === false) {
@@ -29,7 +29,7 @@ const HandleAlerts = () => {
 
         socket.on('init', (data) => {
             setAlerts(data.alerts);
-            setMainAlertId(data.mainAlert);
+            setMainId(data.mainAlertId);
         });
 
         socket.on('newAlert', (data) => {
@@ -45,7 +45,7 @@ const HandleAlerts = () => {
         });
 
         socket.on('setMainAlert', (data) => {
-            setMainAlertId(data.alert);
+            setMainId(data.id);
         });
 
         socket.emit('admin:startAdminSession', {
@@ -112,13 +112,13 @@ const HandleAlerts = () => {
                                 <div key={index} className={'alert'}>
                                     <div>
                                         <h3
-                                            style={mainAlertId && mainAlertId === alert.id ? {color: 'red'} : {}}
+                                            style={mainId && mainId === alert.id ? {color: 'red'} : {}}
                                         >{alert.title}</h3>
                                         <p>{alert.description}</p>
                                     </div>
                                     <div className={'alert-buttons'}>
                                         <button onClick={async () => {
-                                            await setMainAlertId(alert.id)
+                                            await setMainAlert(alert.id)
                                         }}>Principale
                                         </button>
                                         <button onClick={async () => {
