@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f99256a7-e80f-43b0-8480-2e577ec65b6d" name="Changes" comment="Add alert service">
-      <change afterPath="$PROJECT_DIR$/src/sockets.js" afterDir="false" />
+    <list default="true" id="f99256a7-e80f-43b0-8480-2e577ec65b6d" name="Changes" comment="ws">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/alert.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/alert.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/home.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/home.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,9 +32,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2b7zes4ib9Vw4uQbNJ5hJcJILKJ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -46,7 +45,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "refactoring",
+    "git-widget-placeholder": "Antoine",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,6 +58,21 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/services" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="InCaenruptible_front" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="InCaenruptible_front" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -116,6 +130,7 @@
     <MESSAGE value="Move routes in App and out of the Navbar" />
     <MESSAGE value="Rename service file name" />
     <MESSAGE value="Add alert service" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add alert service" />
+    <MESSAGE value="ws" />
+    <option name="LAST_COMMIT_MESSAGE" value="ws" />
   </component>
 </project>

@@ -1,35 +1,45 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import VideoPlayer from "./VideoPlayer";
 import "./Home.css";
 import Spinner from "./Spinner";
 import CreateAlertForm from "./CreateAlertForm";
 import HomeService from '../services/home.service';
+import {Button} from "@chakra-ui/react";
 
 const Home = () => {
-  let [homeService, alert] = useState(false);
+    const [alert, setAlert] = useState(null);
+    const [forceRefresh, setForceRefresh] = useState(null);
 
-  homeService = new HomeService();
+    const homeService = new HomeService(setForceRefresh);
 
-    homeService.fetchAlertPresent().then(() => {
-        if (homeService.alertPresent) {
-            // homeService.initSocket()
-            // homeService.watchAlert()
-            alert = homeService.currentAlert;
-        }
-    });
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const pAlert = await homeService.fetchAlertPresent();
+                if (homeService.alertPresent) {
+                    setAlert(pAlert);
+                }
+            } catch (error) {
+                console.error('Error fetching alert:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <div className="content bodyColor">
-            {alert.length && alert.endTime < Date.now() ? (
+            {alert ? (
                 <div>
-                    <VideoPlayer
-                        length={40}
-                        url="https://www.youtube.com/watch?v=Rq5SEhs9lws&ab_channel=Skillthrive"
-                    />
-                    <h1>Titre</h1>
-                    <h4>
-                        Lorem ipsum
-                    </h4>
+                    <div className="video">
+                        {homeService.alertConfirmed ? (
+                        <video id="webcamVideo" width="640" height="480" autoPlay></video>
+                            ) : (
+                        <video id="remoteVideo" width="640" height="480" autoPlay></video>
+                        )}
+                    </div>
+                    <h1>{alert.title}</h1>
+                    <h4>{alert.description}</h4>
                 </div>
             ) : (
                 ''
@@ -39,10 +49,13 @@ const Home = () => {
                     <Spinner text="Awaiting stream validation, don't leave the page ...."/>
                 ) : (
                     <div>
-                        <CreateAlertForm homeService={homeService}/>
+                        {!homeService.alertConfirmed ? (
+                            <CreateAlertForm homeService={homeService} />
+                        ) : (
+                            <Button onClick={homeService.closeWebSocketStream}>Arreter l'alerte</Button>
+                        )}
                         <div className="video">
                             <video id="webcamVideo" width="640" height="480" autoPlay></video>
-                            <video id="remoteVideo" width="640" height="480" autoPlay></video>
                         </div>
                     </div>
                 )}

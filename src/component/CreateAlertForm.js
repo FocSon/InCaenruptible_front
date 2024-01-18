@@ -35,8 +35,8 @@ function Alert(properties) {
   };
 
   const handleSubmit = (e) => {
+    console.log("form submited")
     e.preventDefault();
-    console.log("passed in the Submit")
     if (formData.title !== "" && formData.description !== "") {
       homeService.createAlert(
         formData.type,

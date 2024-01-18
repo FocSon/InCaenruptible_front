@@ -1,28 +1,81 @@
 import RequestAlert from '../model/RequestAlert';
 import Cookies from 'js-cookie';
 import {io} from '../sockets';
+import * as alertService from "./alert.service";
+import {getAlertsDone} from "./alert.service";
+import {API_URL, WS_URL} from './path';
+import {Alert} from "../model/Alert";
 
 class HomeService {
     alertAwaitingConfirmation = false;
     alertPresent = false;
     alertConfirmed = false;
 
-    streamId = undefined;
+    homeComponentRefresh = undefined;
+
+    currentAlert = undefined;
+
+    socket = undefined;
+
+    constructor(homeComponentRefresh) {
+        this.homeComponentRefresh = homeComponentRefresh;
+    }
+
+    setAlertConfirmed(alertConfirmed) {
+        this.alertConfirmed = alertConfirmed;
+        this.homeComponentRefresh();
+    }
+
+    setAlertAwaitingconfirmation(alertAwaitingConfirmation) {
+        this.alertAwaitingConfirmation = alertAwaitingConfirmation;
+        this.homeComponentRefresh();
+    }
+
+    setAlertPresent(alertPresent) {
+        this.alertPresent = alertPresent;
+        this.homeComponentRefresh();
+    }
 
     async fetchAlertPresent() {
-        this.alertPresent = false;
+        let alerts = (await alertService.getAlertsDone()).listAlert;
+
+        console.log(alerts)
+
+        alerts.filter((x) => x.category === 'video')
+        this.setAlertPresent(alerts.length > 0);
+
+        if(this.alertPresent) {
+            this.currentAlert = this.alertPresent ? alerts[0] : undefined;
+
+            this.initSocket();
+            this.watchAlert(this);
+        }
+
+        return this.currentAlert;
+    }
+
+    closeWebSocketStream() {
+        this.socket.emit('stopStream', {token: Cookies.get('token')});
+        this.setAlertConfirmed(false);
+        this.fetchAlertPresent();
     }
 
     launchWebSocketStream() {
+        console.log("streaming")
         navigator.mediaDevices
             .getUserMedia({video: {width: 640, height: 480}, audio: true})
             .then((stream) => {
                 const video = document.getElementById('webcamVideo');
                 video.srcObject = stream;
 
-                const socket = io('ws://192.93.212.217:8080/');
-                this.registerSocketEvents(socket);
-                socket.emit('streamData', {
+                if(this.socket === undefined)
+                {
+                    this.initSocket();
+                }
+
+                console.log(Cookies.get('token'))
+
+                this.socket.emit('streamData', {
                     data: undefined,
                     token: Cookies.get('token'),
                 });
@@ -35,126 +88,97 @@ class HomeService {
                         return;
                     }
                 }
-                let mediaRecorder = new MediaRecorder(stream, {mimeType});
-
-                mediaRecorder.start(1000);
-
-                mediaRecorder.ondataavailable = (event) => {
+                const mediaRecorderConsumer = (event) => {
                     if (event.data.size > 100000) {
-                        socket.emit('streamData', {
+                        this.socket.emit('streamData', {
                             data: event.data,
                             token: Cookies.get('token'),
                         });
-
-                        // const blob = new Blob([event.data], { type: 'video/webm; codecs=vp9' });
-                        // const url = URL.createObjectURL(blob);
-                        // const video = document.getElementById('remoteVideo');
-                        // video.src = url;
-
-                        mediaRecorder.stop();
-
-                        const callback = mediaRecorder.ondataavailable;
-
-                        mediaRecorder = new MediaRecorder(stream, {
-                            mimeType
-                        });
-
-                        mediaRecorder.start(1000);
-
-                        mediaRecorder.ondataavailable = callback;
                     }
                 };
-            }).catch(e => {
-            console.error(e);
-            console.log('Error while getting user media');
+
+                setInterval(() => {
+                    let mediaRecorder = new MediaRecorder(stream, { mimeType });
+
+                    mediaRecorder.start(2000);
+
+                    mediaRecorder.ondataavailable = (event) => {
+                        mediaRecorderConsumer(event);
+                        mediaRecorder.stop();
+                    }
+                }, 1950);
         });
     }
 
     registerSocketEvents(socket) {
+        const that = this;
+
         socket.on('emitter:alertRefused', function (event) {
             socket.send('Stream refusé');
             socket.close();
-            this.alertConfirmed = false;
+            that.setAlertConfirmed(false);
         });
 
         socket.on('emitter:alertDone', function (event) {
             socket.send('Stream terminé');
             socket.close();
-            this.alertConfirmed = false;
+            that.setAlertConfirmed(false);
         });
 
         socket.on('emitter:alertAccepted', function (event) {
             console.log('Stream accepté');
 
-            Cookies.set('token', event.token, {expires: 1 * 24 * 60 * 60});
-            this.alertConfirmed = true;
+            Cookies.set('token', event.token, { expires: 1 * 24 * 60 * 60});
+            that.setAlertConfirmed(true);
 
-            console.log(event);
+            that.currentAlert.id = event.alertId;
 
-            socket.emit('watchAlert', {id: event.alertId});
+            that.watchAlert(that, that.socket, event.alertId);
+        });
+    }
 
-            socket.on(`streamData`, function (event) {
-                console.log(event);
+    watchAlert(that = this, socket = that.socket, alertId = that.currentAlert.id) {
+        socket.emit('watchAlert', { id: alertId });
 
+        socket.on(`streamAlertData`, function (event) {
+            console.log(event)
+
+            const video = document.getElementById('remoteVideo');
+
+            if(video) {
                 const blob = new Blob([event.data], {type: 'video/webm; codecs=vp9'});
                 const url = URL.createObjectURL(blob);
-                const video = document.getElementById('remoteVideo');
                 video.src = url;
-            });
-
-            //TODO appel watchalert avec l'id de l'alerte contenu dans l'event
-            //
-            // const blob = new Blob([event.data], { type: 'video/webm; codecs=vp9' });
-            // const url = URL.createObjectURL(blob);
-            // const video = document.getElementById('remoteVideo');
-            // video.src = url;
-            // console.log(url);
+            }
         });
     }
 
     async createAlert(type, category, title, description) {
-        const payload = new RequestAlert(
-            type,
-            category,
-            title,
-            description,
-            undefined
-        );
-
-        const url = 'http://192.93.212.217:8080/api/requestAlert';
-
         try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            });
-            console.log(response.statusText);
-
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
-
-            const resJson = await response.json();
-            Cookies.set('token', resJson.token, {expires: 1 * 24 * 60 * 60});
+            const token = (await alertService.requestAlert(title, description, type, category)).token;
+            Cookies.set('token', token, {expires: 1 * 24 * 60 * 60});
         } catch (e) {
             console.log(e);
             console.log('Error while creating alert');
-            this.alertAwaitingConfirmation = false;
+            this.setAlertAwaitingconfirmation(false);
             return;
         }
 
-        this.alertAwaitingConfirmation = true;
+        this.currentAlert = new Alert(-1, type, category, title, description);
+        this.setAlertAwaitingconfirmation(true);
 
         try {
             this.launchWebSocketStream();
         } catch (e) {
             console.log(e);
             console.log('Error while opening websocket');
-            this.alertAwaitingConfirmation = false;
+            this.setAlertAwaitingconfirmation(false);
         }
+    }
+
+    initSocket() {
+        this.socket = io(WS_URL);
+        this.registerSocketEvents(this.socket);
     }
 }
 
