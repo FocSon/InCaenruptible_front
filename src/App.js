@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Navbar from "./component/Navbar";
+import { Global, css } from "@emotion/react";
 
 function App() {
+  useEffect(() => {
+    // Set the data-theme attribute to "dark" on the html element
+    document.documentElement.setAttribute("data-theme", "light");
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Global
+        styles={css`
+          html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Full height */
+            width: 100%; /* Full width */
+            display: flex;
+            flex-direction: column;
+            background-color:var(--main-bg-color);
+          }
+          #root {
+            height: 100%; /* Full height */
+            display: flex;
+            flex-direction: column;
+          }
+        `}
+      />
+      <Navbar />
+    </>
   );
 }
-
 export default App;
