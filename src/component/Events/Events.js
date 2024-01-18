@@ -123,7 +123,7 @@ const Event = () => {
   
 
   return (
-    <main className=''>
+    <main className='bodyColor'>
       <FilterComponent onFilterChange={handleFilterChange}/>
       <AccordionComponent items={items}/>
     </main>
