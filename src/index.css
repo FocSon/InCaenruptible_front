@@ -2,23 +2,27 @@
 
 :root {
   --main-bg-color: #013120;
+  --second-bg-color: #59866fd2;
   --navbar-bg-color:#94c6b0;
   --navbar-color-text:#013120;
   --navbar-hover-color:#bddbce;
+  --title-color:#fffaee;
 }
 
-body {
-  margin: 0;
-  padding:0;
-  font-family: sans-serif;
-  -webkit-font-smoothing: antialiased;
-  background-color: rgb(0, 0, 0); 
-}
 
-/*! -----------HEADER------------ */
+
+/*! -----------FONT------------ */
 
 @font-face {
   font-family: 'KCObraLetraRegular';
+  src: url('./font/KCObraLetraBold.woff2') format('woff2'),
+       url('./font/KCObraLetraBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Stencil';
   src: url('./font/KCObraLetraBold.woff2') format('woff2'),
        url('./font/KCObraLetraBold.woff') format('woff');
   font-weight: normal;
@@ -34,13 +38,37 @@ body {
 
 
 .bodyColor {
+  background-image: url('./imgs/leaf3.jpg'); /* Replace with your image path */
+  background-color: var(--second-bg-color); /* Semi-transparent white overlay; adjust as needed */
+  background-blend-mode: overlay; /* Blend the background color with the image */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%; /* Ensure this is 100% for full height */
+  flex: 1;
+}
 
-  padding: 10px 0;
-  background-color:var(--main-bg-color);
-  height: 100%;
+
+/*! -----------TEXT------------ */
+.title {
+
+  margin-top: 3%;
+  font-size: 50px;
+  color:var(--title-color) ;
+  text-decoration: underline;
+  font-family: 'Stencil', sans-serif;
+  text-align: center;
 
 }
 
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+/*! -----------NAV------------ */
 /* Style the links */
 nav>ul>li>a {
   color: var(--navbar-color-text);
@@ -72,18 +100,26 @@ nav, nav ul, nav img, nav a, nav li {
   margin-right: 0;
 }
 
-nav ul {
-  display: grid; /* Use grid layout */
-  grid-template-columns: 1fr 1fr 1fr; /* Three columns, each 1 fraction of the available space */
-  justify-items: center; /* Center items horizontally in the grid cell */
-  align-items: center; /* Center items vertically in the grid cell */
-  list-style-type: none; /* Remove default list styling */
+/* nav ul {
+  display: grid; 
+  grid-template-columns: 4fr 5fr 5fr; 
+  align-items: center; 
+  list-style-type: none; 
   padding: 0;
   margin: 0;
-  height: 100%; /* Ensure the ul takes full height of the nav */
+  height: 100%; 
+  width: 100%;
+} */
+
+nav ul {
+  display: flex; 
+  align-items: center; 
+  list-style-type: none; 
+  padding: 0;
+  margin-left: 10px;
+  height: 100%; 
   width: 100%;
 }
-
 
 nav ul li {
   margin: 0 15px; /* Space between list items */
@@ -93,5 +129,41 @@ nav ul li {
 /*! -----------CARD------------ */
 
 .rowCard{
-  margin: 100px;
+  
+}
+
+/* Apply styles for medium screens and up */
+@media screen and (min-width: 48em) { /* 48em is equivalent to 768px */
+  .rowCard {
+    margin: 100px;
+  }
+}
+
+
+
+/*! -----------PARALLAX------------ */
+
+
+.parallax-background {
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.parallax-title {
+  text-align: center;
+  color: white; /* or any color of your choice */
+  font-size: 2rem; /* adjust as needed */
+}
+
+/*! -----------SCROLL------------ */
+
+.scroll-container {
+  scroll-snap-type: y mandatory; /* Vertical scrolling */
+  overflow-y: scroll;
+  height: 100vh; /* Adjust as needed */
+}
+
+.scroll-section {
+  scroll-snap-align: start;
+  height: 100vh; /* Adjust based on your content */
 }

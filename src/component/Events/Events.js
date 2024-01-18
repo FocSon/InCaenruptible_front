@@ -123,10 +123,10 @@ const Event = () => {
   
 
   return (
-    <ChakraProvider theme={theme}>
+    <main className=''>
       <FilterComponent onFilterChange={handleFilterChange}/>
       <AccordionComponent items={items}/>
-    </ChakraProvider>
+    </main>
   );
 };
 
