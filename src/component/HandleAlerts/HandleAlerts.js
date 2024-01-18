@@ -76,6 +76,7 @@ const HandleAlerts = () => {
     }
 
     return (
+        <main className="content bodyColor ">
         <Box className="handle-alerts">
             <Box>
                 <Heading as="h2">Demandes</Heading>
@@ -133,6 +134,7 @@ const HandleAlerts = () => {
                 </Box>
             </Box>
         </Box>
+        </main>
     );
 
 

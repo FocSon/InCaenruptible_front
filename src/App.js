@@ -7,12 +7,16 @@ import Posts from './component/Posts';
 import Events from './component/Events/Events';
 import AdminLogin from './component/Login/AdminLogin';
 import HandleAlerts from './component/HandleAlerts/HandleAlerts';
+import Broadcast from './component/Broadcast';
 
 function App() {
     useEffect(() => {
         // Set the data-theme attribute to "dark" on the html element
         document.documentElement.setAttribute('data-theme', 'light');
     }, []);
+
+    const isBroadcasting = localStorage.getItem('broadcastToken') !== null;
+
     return (
         <>
             <Global
@@ -36,7 +40,10 @@ function App() {
                 <Navbar/>
 
                 <Routes>
-                    <Route path="*" element={<Home/>}/>
+                    <Route path="*" element={isBroadcasting
+                        ? <Broadcast/>
+                        : <Home/>
+                    }/>
                     <Route path="/posts" element={<Posts/>}/>
                     <Route path="/events" element={<Events/>}/>
                     <Route path="/admin-login" element={<AdminLogin/>}/>
