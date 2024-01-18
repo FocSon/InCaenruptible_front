@@ -1,0 +1,7 @@
+.handle-alerts{
+    color : var( --navbar-hover-color);
+    font-size: 20px;
+    font-style: 'KCObraLetraRegular', sans-serif;
+    display: flex;
+    justify-content: center;
+  }
