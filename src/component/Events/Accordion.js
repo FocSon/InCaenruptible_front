@@ -27,7 +27,6 @@ function AccordionComponent({ items }) {
 
   return (
     <Box p={5}>
-      <h1>Fil des alertes</h1>
       <Accordion allowToggle>
         {accordionItems.map((item, index) => (
           <AccordionItem key={index}>
