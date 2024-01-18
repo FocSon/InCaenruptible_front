@@ -1,55 +1,128 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import AccordionComponent from './Accordion';
-import theme from './AccordionTheme'; // Import the theme
-import FilterComponent from './Filter'; // Import the FilterComponent from the new file
-
-
+import theme from './AccordionTheme';
+import FilterComponent from './Filter';
 
 const Event = () => {
+  const [responses] = useState([
+    {
+      id: 1,
+      title: 'Sample Alert',
+      description: 'This is a sample alert.',
+      startTime: 1644566400000,
+      endTime: 1644570000000,
+      type: 'video', //video, photo, data
+      category: 'pollution', //pollution, son, dechet
+    },
+    {
+      id: 2,
+      title: 'Sample Alert 2',
+      description: 'This is a sample alert.',
+      startTime: 1644566400000,
+      endTime: null,
+      type: 'photo', //video, photo, data
+      category: 'son', //pollution, son, dechet
+    },
+    {
+      id: 3,
+      title: 'Sample Alert 3',
+      description: 'This is a sample alert.',
+      startTime: 1644566400000,
+      endTime: null,
+      type: 'data', //video, photo, data
+      category: 'pollution', //pollution, son, dechet
+    },
+    {
+      id: 4,
+      title: 'Sample Alert 4',
+      description: 'This is a sample alert.',
+      startTime: 1644566400000,
+      endTime: null,
+      type: 'data', //video, photo, data
+      category: 'son', //pollution, son, dechet
+    },
+    {
+      id: 5,
+      title: 'Sample Alert 5',
+      description: 'This is a sample alert.',
+      startTime: 1644566400000,
+      endTime: null,
+      type: 'video', //video, photo, data
+      category: 'dechet', //pollution, son, dechet
+    },
+    {
+      id: 6,
+      title: 'Sample Alert 6',
+      description: 'This is a sample alert.',
+      startTime: 1644566400000,
+      endTime: null,
+      type: 'photo', //video, photo, data
+      category: 'dechet', //pollution, son, dechet
+    },
+    {
+      id: 7,
+      title: 'Sample Alert 7',
+      description: 'This is a sample alert.',
+      startTime: 1644566400000,
+      endTime: null,
+      type: 'data', //video, photo, data
+      category: 'pollution', //pollution, son, dechet
+    },
+  ]);
 
-  //-------------------------------fetch alert------------------------------------
-  const responses = [];
-
-  const responseData1 = {
-    id: 1,
-    title: 'Sample Alert',
-    description: 'This is a sample alert.',
-    startTime: 1644566400000, // Replace with an actual timestamp
-    endTime: 1644570000000,   // Replace with an actual timestamp or null
-    type: 'video',            // Replace with 'photo', 'data', etc.
-    category: 'pollution',     // Replace with 'noise', 'deterioration', etc.
-  };
-  
-  const responseData2 = {
-    id: 2,
-    title: 'Sample Alert 2',
-    description: 'This is a sample alert.',
-    startTime: 1644566400000, // Replace with an actual timestamp
-    endTime: 1644570000000,   // Replace with an actual timestamp or null
-    type: 'video',            // Replace with 'photo', 'data', etc.
-    category: 'pollution',     // Replace with 'noise', 'deterioration', etc.
-  };
-
-  responses.push(responseData1);
-  responses.push(responseData2);
-
-  const items = [];
-
-  //-------------------------------------filtering------------------------------------
+  const [items, setItems] = useState([]);
   const handleFilterChange = (selectedFilters) => {
-    for(const filter in selectedFilters) {
-      console.log('Selected Filter:', filter);
-      
+    setItems((prevItems) => {
+      // Use the previous items to calculate the new items
+      const filteredItems = responses
+        .filter(doIDisplay)
+        .map((response) => ({
+          title: response.title,
+          content: response.description,
+          type: response.type,
+          category: response.category,
+          isOpen: false,
+        }));
+  
+      return filteredItems;
+    });
+
+    console.log(selectedFilters);
+  
+    function doIDisplay(item) {
+      if (item.type === 'video') {
+        if(selectedFilters.includes('VOD')) {
+          return false;
+        }
+      } else if (item.type === 'photo') {
+        if(selectedFilters.includes('PICTURE')) {
+          return false;
+        }
+      } else if (item.type === 'data') {
+        if(selectedFilters.includes('DATA')) {
+          return false;
+        }
+      }
+
+      if (item.category === 'pollution') {
+        if(selectedFilters.includes('POLL')) {
+          return false;
+        }
+      } else if (item.category === 'son') {
+        if(selectedFilters.includes('SOUND')) {
+          return false;
+        }
+      } else if (item.category === 'dechet') {
+        if(selectedFilters.includes('TRASH')) {
+          return false;
+        }
+      }
+    
+      return true;
     }
   };
-
-  //TODO : add flags to add video or mesurment in the alert if necessary
-  for (let i=0; i<responses.length; i++) { //creating the alert list
-    items.push( {
-      title: responses[i].title, content: responses[i].description, isOpen: false
-    })
-  }
+  
 
   return (
     <ChakraProvider theme={theme}>

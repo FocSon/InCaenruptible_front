@@ -1,9 +1,12 @@
-// src/components/Accordion.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Box } from '@chakra-ui/react';
 
 function AccordionComponent({ items }) {
-  const [accordionItems, setAccordionItems] = useState(items || []);
+  const [accordionItems, setAccordionItems] = useState([]);
+
+  useEffect(() => {
+    setAccordionItems(items);
+  }, [items]);
 
   const handleToggle = (index) => {
     setAccordionItems((prevItems) => {
