@@ -13,3 +13,7 @@
     display: flex;
     justify-content: center;
   }
+
+  .button-logout{
+    border: 2px solid #ffffff;
+  }
