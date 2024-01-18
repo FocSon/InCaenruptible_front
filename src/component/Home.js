@@ -3,7 +3,7 @@ import VideoPlayer from "./VideoPlayer";
 import "./Home.css";
 import Spinner from "./Spinner";
 import CreateAlertForm from "./CreateAlertForm";
-import HomeService from "../service/HomeService";
+import HomeService from '../services/HomeService';
 
 const Home = () => {
   let [homeService, alert] = useState(false);

@@ -1,32 +1,18 @@
 import React from 'react';
-import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
-import logo from "../imgs/logo.png";
-import Posts from "./Posts";
-import AdminLogin from "./Login/AdminLogin";
-import Events from "./Events/Events";
-import Home from "./Home";
-import HandleAlerts from './HandleAlerts/HandleAlerts';
+import {Link} from 'react-router-dom';
+import logo from '../imgs/logo.png';
 
 function Navbar() {
     return (
-        <Router>
-            <nav>
-                <img src={logo} alt="Logo" className="navbar-logo" />
+        <nav>
+            <img src={logo} alt="Logo" className="navbar-logo"/>
 
-                <ul>
-                    <li><Link to="*">Principal</Link></li>
-                    <li className='center'><Link to="/posts">Posts</Link></li>
-                    <li className='right'><Link to="/events">Evenements</Link></li>
-                </ul>
-            </nav>
-            <Routes>
-                <Route path="*" element={<Home />} />
-                <Route path="/posts" element={<Posts />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/admin-login" element={<AdminLogin />} />
-                <Route path="/handle-alerts" element={<HandleAlerts/>}/>
-            </Routes>
-        </Router> //it is not required to have a login button as only the admin will use it
+            <ul>
+                <li><Link to="*">Principal</Link></li>
+                <li className="center"><Link to="/posts">Posts</Link></li>
+                <li className="right"><Link to="/events">Evenements</Link></li>
+            </ul>
+        </nav>
     );
 }
 
