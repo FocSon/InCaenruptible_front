@@ -26,8 +26,8 @@ const AdminLogin = () => {
     else{                               
         return (
             <div className="logout-text">
-                <h2>You are logged in</h2>
-                <button onClick={logoutCall}>logout</button>     
+                <h2 className='text-login'>You are logged in</h2>
+                <button className='text-login' onClick={logoutCall}>logout</button>     
             </div>
         );
     }
