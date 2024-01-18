@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f99256a7-e80f-43b0-8480-2e577ec65b6d" name="Changes" comment="Move routes in App and out of the Navbar">
-      <change afterPath="$PROJECT_DIR$/src/services/alert.service.js" afterDir="false" />
+    <list default="true" id="f99256a7-e80f-43b0-8480-2e577ec65b6d" name="Changes" comment="Add alert service">
+      <change afterPath="$PROJECT_DIR$/src/sockets.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/HandleAlerts/HandleAlerts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/HandleAlerts/HandleAlerts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/Login/AdminLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Login/AdminLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/HomeService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/home.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/login-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/login.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/alert.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/alert.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/home.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/home.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705581004687</updated>
-      <workItem from="1705581006689" duration="4118000" />
+      <workItem from="1705581006689" duration="4736000" />
     </task>
     <task id="LOCAL-00001" summary="Fix login form reload and switch server path to vps">
       <option name="closed" value="true" />
@@ -89,7 +86,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705585103696</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Rename service file name">
+      <option name="closed" value="true" />
+      <created>1705585345708</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1705585345708</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +114,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix login form reload and switch server path to vps" />
     <MESSAGE value="Move routes in App and out of the Navbar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Move routes in App and out of the Navbar" />
+    <MESSAGE value="Rename service file name" />
+    <MESSAGE value="Add alert service" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add alert service" />
   </component>
 </project>
