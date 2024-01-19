@@ -2,6 +2,7 @@ import {useEffect, useMemo, useRef, useState} from 'react';
 import CreateAlertForm from './CreateAlertForm';
 import {socket} from '../sockets';
 import './Home.css';
+import StreamVideoFrame from './StreamVideoFrame';
 
 const Home = () => {
     const [alerts, setAlerts] = useState([]);
@@ -72,9 +73,7 @@ const Home = () => {
             {
                 mainAlert ? (
                     <div style={{color:"white"}}>
-                        <video style={{
-                            height: '50vh'
-                        }} autoPlay ref={videoRef}></video>
+                        <StreamVideoFrame streamId={mainAlert.id}/>
                         <h1>{mainAlert.title}</h1>
                         <h4>{mainAlert.description}</h4>
                     </div>

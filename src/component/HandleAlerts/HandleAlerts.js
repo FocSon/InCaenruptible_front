@@ -3,10 +3,14 @@ import './HandleAlerts.css';
 import loginService from '../../services/login.service';
 import {socket} from '../../sockets';
 import {acceptRequest, deleteAlert, endAlert, refuseRequest, setMainAlert} from '../../services/admin.service';
-import {background} from '@chakra-ui/styled-system';
-import { Box, Button, Heading, Text, VStack, Center, Flex } from '@chakra-ui/react';
-import { CheckIcon, CloseIcon, StarIcon, RepeatClockIcon, DeleteIcon } from '@chakra-ui/icons';
+import {Box, Button, Center, Flex, Heading, Text, VStack} from '@chakra-ui/react';
+import {CheckIcon, CloseIcon, DeleteIcon, RepeatClockIcon, StarIcon} from '@chakra-ui/icons';
+import StreamVideoFrame from '../StreamVideoFrame';
 
+function addIsWatch(obj) {
+    obj.isWatch = false;
+    return obj;
+}
 
 const HandleAlerts = () => {
     const [requests, setRequests] = React.useState([]);
@@ -19,11 +23,11 @@ const HandleAlerts = () => {
         }
 
         socket.on('admin:init', (data) => {
-            setRequests(data.requests);
+            setRequests(data.requests.map(addIsWatch));
         });
 
         socket.on('admin:newRequest', (data) => {
-            setRequests((requests) => [...requests, data.request]);
+            setRequests((requests) => [...requests, addIsWatch(data.request)]);
         });
 
         socket.on('admin:requestDeleted', (data) => {
@@ -31,12 +35,12 @@ const HandleAlerts = () => {
         });
 
         socket.on('init', (data) => {
-            setAlerts(data.alerts);
+            setAlerts(data.alerts.map(addIsWatch));
             setMainId(data.mainAlertId);
         });
 
         socket.on('newAlert', (data) => {
-            setAlerts((alerts) => [...alerts, data.alert]);
+            setAlerts((alerts) => [...alerts, addIsWatch(data.alert)]);
         });
 
         socket.on('deleteAlert', (data) => {
@@ -77,63 +81,102 @@ const HandleAlerts = () => {
 
     return (
         <main className="content bodyColor ">
-        <Box className="handle-alerts">
-            <Box>
-                <Heading as="h2">Demandes</Heading>
-                <Box className="requests">
-                    {requests.map((request, index) => (
-                        <Box key={index} className="request">
-                            <Heading as="h3" size="md">{request.title}</Heading>
-                            <Text as="h4">{request.description}</Text>
-                            <Flex justifyContent="flex-end">
-                                <VStack spacing={2}>
-                                    <Center>
-                                        <Button leftIcon={<CheckIcon />} colorScheme="blue" onClick={async () => {
-                                            await acceptRequest(request.requestId);
-                                        }} />
-                                    </Center>
-                                    <Center>
-                                        <Button leftIcon={<CloseIcon />} colorScheme="red" onClick={async () => {
-                                            await refuseRequest(request.requestId);
-                                        }} />
-                                    </Center>
-                                </VStack>
-                            </Flex>
-                        </Box>
-                    ))}
+            <Box className="handle-alerts">
+                <Box>
+                    <Heading as="h2">Demandes</Heading>
+                    <Box className="requests">
+                        {requests.map((request, index) => (
+                            <Box key={index} className="request">
+                                <Heading as="h3" size="md">{request.title}</Heading>
+                                <Text as="h4">{request.description}</Text>
+                                {
+                                    request.isWatch === true ?
+                                        <StreamVideoFrame streamId={request.requestId} isRequest={true} onClick={() => {
+                                            setRequests((requests) => requests.map((request) => {
+                                                if (request.requestId === request.requestId) {
+                                                    request.isWatch = false;
+                                                }
+                                                return request;
+                                            }));
+                                        }}/> :
+                                        <Button colorScheme="blue" onClick={async () => {
+                                            await setRequests((requests) => requests.map((request) => {
+                                                if (request.requestId === request.requestId) {
+                                                    request.isWatch = true;
+                                                }
+                                                return request;
+                                            }));
+                                        }}>Voir</Button>
+                                }
+                                <Flex justifyContent="flex-end">
+                                    <VStack spacing={2}>
+                                        <Center>
+                                            <Button leftIcon={<CheckIcon/>} colorScheme="blue" onClick={async () => {
+                                                await acceptRequest(request.requestId);
+                                            }}/>
+                                        </Center>
+                                        <Center>
+                                            <Button leftIcon={<CloseIcon/>} colorScheme="red" onClick={async () => {
+                                                await refuseRequest(request.requestId);
+                                            }}/>
+                                        </Center>
+                                    </VStack>
+                                </Flex>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
+                <Box>
+                    <Heading as="h2">Alertes en cours</Heading>
+                    <Box className="alerts">
+                        {alerts.map((alert, index) => (
+                            <Box key={index} className="alert">
+                                <Heading as="h3" size="lg"
+                                         color={mainId && mainId === alert.id ? 'red' : 'inherit'}>{alert.title}</Heading>
+                                <Text as="h4">{alert.description}</Text>
+                                {
+                                    alert.isWatch === true ?
+                                        <StreamVideoFrame streamId={alert.id} isRequest={false} onClick={() => {
+                                            setAlerts((alerts) => alerts.map((alert) => {
+                                                if (alert.id === alert.id) {
+                                                    alert.isWatch = false;
+                                                }
+                                                return alert;
+                                            }));
+                                        }}/> :
+                                        <Button colorScheme="blue" onClick={async () => {
+                                            await setAlerts((alerts) => alerts.map((alert) => {
+                                                if (alert.id === alert.id) {
+                                                    alert.isWatch = true;
+                                                }
+                                                return alert;
+                                            }));
+                                        }}>Voir</Button>
+                                }
+                                <Flex justifyContent="flex-end">
+                                    <VStack spacing={2}>
+                                        <Button iconSpacing={0} size="lg" colorScheme="gray" onClick={async () => {
+                                            await setMainAlert(alert.id);
+                                        }}>
+                                            <StarIcon w={6} h={6}/>
+                                        </Button>
+                                        <Button iconSpacing={0} size="lg" onClick={async () => {
+                                            await endAlert(alert.id, 'L\'alerte a été terminée par l\'administrateur');
+                                        }}>
+                                            <RepeatClockIcon w={6} h={6}/>
+                                        </Button>
+                                        <Button iconSpacing={0} size="lg" colorScheme="gray" onClick={async () => {
+                                            await deleteAlert(alert.id);
+                                        }}>
+                                            <DeleteIcon w={6} h={6}/>
+                                        </Button>
+                                    </VStack>
+                                </Flex>
+                            </Box>
+                        ))}
+                    </Box>
                 </Box>
             </Box>
-            <Box>
-                <Heading as="h2">Alertes en cours</Heading>
-                <Box className="alerts">
-                    {alerts.map((alert, index) => (
-                        <Box key={index} className="alert">
-                            <Heading as="h3" size="lg" color={mainAlertId && mainAlertId === alert.id ? "red" : "inherit"}>{alert.title}</Heading>
-                            <Text as="h4">{alert.description}</Text>
-                            <Flex justifyContent="flex-end">
-                                <VStack spacing={2}>
-                                    <Button iconSpacing={0}  size="lg" colorScheme="gray" onClick={async () => {
-                                        await setMainAlert(alert.id);
-                                    }}>
-                                        <StarIcon w={6} h={6} />
-                                    </Button>
-                                    <Button iconSpacing={0}  size="lg" onClick={async () => {
-                                        await endAlert(alert.id, 'L\'alerte a été terminée par l\'administrateur');
-                                    }}>
-                                        <RepeatClockIcon w={6} h={6} />
-                                    </Button>
-                                    <Button iconSpacing={0}  size="lg" colorScheme="gray" onClick={async () => {
-                                        await deleteAlert(alert.id);
-                                    }}>
-                                        <DeleteIcon w={6} h={6} />
-                                    </Button>
-                                </VStack>
-                            </Flex>
-                        </Box>
-                    ))}
-                </Box>
-            </Box>
-        </Box>
         </main>
     );
 };
