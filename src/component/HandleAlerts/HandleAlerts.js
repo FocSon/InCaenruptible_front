@@ -92,17 +92,17 @@ const HandleAlerts = () => {
                                 {
                                     request.isWatch === true ?
                                         <StreamVideoFrame streamId={request.requestId} isRequest={true} onClick={() => {
-                                            setRequests((requests) => requests.map((request) => {
-                                                if (request.requestId === request.requestId) {
-                                                    request.isWatch = false;
+                                            setRequests((requests) => requests.map((r) => {
+                                                if (request.requestId === r.requestId) {
+                                                    return {...r, isWatch: false};
                                                 }
                                                 return request;
                                             }));
                                         }}/> :
                                         <Button colorScheme="blue" onClick={async () => {
-                                            await setRequests((requests) => requests.map((request) => {
-                                                if (request.requestId === request.requestId) {
-                                                    request.isWatch = true;
+                                            await setRequests((requests) => requests.map((r) => {
+                                                if (request.requestId === r.requestId) {
+                                                    return {...r, isWatch: true};
                                                 }
                                                 return request;
                                             }));
@@ -137,17 +137,17 @@ const HandleAlerts = () => {
                                 {
                                     alert.isWatch === true ?
                                         <StreamVideoFrame streamId={alert.id} isRequest={false} onClick={() => {
-                                            setAlerts((alerts) => alerts.map((alert) => {
-                                                if (alert.id === alert.id) {
-                                                    alert.isWatch = false;
+                                            setAlerts((alerts) => alerts.map((a) => {
+                                                if (alert.id === a.id) {
+                                                    return {...a, isWatch: false};
                                                 }
                                                 return alert;
                                             }));
                                         }}/> :
                                         <Button colorScheme="blue" onClick={async () => {
-                                            await setAlerts((alerts) => alerts.map((alert) => {
-                                                if (alert.id === alert.id) {
-                                                    alert.isWatch = true;
+                                            await setAlerts((alerts) => alerts.map((a) => {
+                                                if (alert.id === a.id) {
+                                                    return {...a, isWatch: true};
                                                 }
                                                 return alert;
                                             }));
