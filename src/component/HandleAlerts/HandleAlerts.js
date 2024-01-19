@@ -96,7 +96,7 @@ const HandleAlerts = () => {
                                                 if (request.requestId === r.requestId) {
                                                     return {...r, isWatch: false};
                                                 }
-                                                return request;
+                                                return r;
                                             }));
                                         }}/> :
                                         <Button colorScheme="blue" onClick={async () => {
@@ -104,7 +104,7 @@ const HandleAlerts = () => {
                                                 if (request.requestId === r.requestId) {
                                                     return {...r, isWatch: true};
                                                 }
-                                                return request;
+                                                return r;
                                             }));
                                         }}>Voir</Button>
                                 }
@@ -132,7 +132,7 @@ const HandleAlerts = () => {
                         {alerts.map((alert, index) => (
                             <Box key={index} className="alert">
                                 <Heading as="h3" size="lg"
-                                         color={mainId && mainId === alert.id ? 'red' : 'inherit'}>{alert.title}</Heading>
+                                         color={mainId && mainId === alert.id ? 'red !important' : 'inherit'}>{alert.title}</Heading>
                                 <Text as="h4">{alert.description}</Text>
                                 {
                                     alert.isWatch === true ?
@@ -141,7 +141,7 @@ const HandleAlerts = () => {
                                                 if (alert.id === a.id) {
                                                     return {...a, isWatch: false};
                                                 }
-                                                return alert;
+                                                return a;
                                             }));
                                         }}/> :
                                         <Button colorScheme="blue" onClick={async () => {
@@ -149,7 +149,7 @@ const HandleAlerts = () => {
                                                 if (alert.id === a.id) {
                                                     return {...a, isWatch: true};
                                                 }
-                                                return alert;
+                                                return a;
                                             }));
                                         }}>Voir</Button>
                                 }

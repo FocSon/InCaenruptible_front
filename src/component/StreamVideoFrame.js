@@ -55,7 +55,7 @@ const StreamVideoFrame = ({streamId, isRequest = false, onClick}) => {
     return (
         <video
             style={{
-                height: '50vh'
+                height: '50%'
             }}
             autoPlay
             ref={videoRef}
