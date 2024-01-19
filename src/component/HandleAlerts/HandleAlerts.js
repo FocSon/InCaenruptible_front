@@ -96,7 +96,7 @@ const HandleAlerts = () => {
                                                 if (request.requestId === r.requestId) {
                                                     return {...r, isWatch: false};
                                                 }
-                                                return request;
+                                                return r;
                                             }));
                                         }}/> :
                                         <Button colorScheme="blue" onClick={async () => {
@@ -104,7 +104,7 @@ const HandleAlerts = () => {
                                                 if (request.requestId === r.requestId) {
                                                     return {...r, isWatch: true};
                                                 }
-                                                return request;
+                                                return r;
                                             }));
                                         }}>Voir</Button>
                                 }
@@ -141,7 +141,7 @@ const HandleAlerts = () => {
                                                 if (alert.id === a.id) {
                                                     return {...a, isWatch: false};
                                                 }
-                                                return alert;
+                                                return a;
                                             }));
                                         }}/> :
                                         <Button colorScheme="blue" onClick={async () => {
@@ -149,7 +149,7 @@ const HandleAlerts = () => {
                                                 if (alert.id === a.id) {
                                                     return {...a, isWatch: true};
                                                 }
-                                                return alert;
+                                                return a;
                                             }));
                                         }}>Voir</Button>
                                 }
