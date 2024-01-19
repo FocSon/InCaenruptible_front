@@ -132,7 +132,7 @@ const HandleAlerts = () => {
                         {alerts.map((alert, index) => (
                             <Box key={index} className="alert">
                                 <Heading as="h3" size="lg"
-                                         color={mainId && mainId === alert.id ? 'red' : 'inherit'}>{alert.title}</Heading>
+                                         color={mainId && mainId === alert.id ? 'red !important' : 'inherit'}>{alert.title}</Heading>
                                 <Text as="h4">{alert.description}</Text>
                                 {
                                     alert.isWatch === true ?
