@@ -7,7 +7,7 @@ function FilterComponent({ onFilterChange }) {
   useEffect(() => {
     // Call the callback function with the updated selected filters
     onFilterChange(selectedFilters);
-  }, [selectedFilters, onFilterChange]);
+  }, [selectedFilters]);
 
   const handleCheckboxChange = (value) => {
     setSelectedFilters((prevFilters) => {
