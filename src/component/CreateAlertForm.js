@@ -1,75 +1,110 @@
 import React, {useState} from 'react';
 import './CreateAlertForm.css';
+import {
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    Select,
+    useDisclosure
+} from '@chakra-ui/react';
+import {requestAlert} from '../services/alert.service';
 
-function CreateAlertForm(properties) {
-    const {homeService} = properties;
+function CreateAlertForm() {
+    const {isOpen, onOpen, onClose} = useDisclosure();
 
     const [formData, setFormData] = useState({
-        type: 'video',
         category: 'city',
         title: '',
         description: '',
     });
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+
+    const handleInputChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if(formData.title !== '' || formData.description !== '') {
-            homeService.createAlert(formData.type, formData.category, formData.title, formData.description).then(r => {})
+        if (formData.title !== '' && formData.description !== '') {
+            const {
+                requestId,
+                token
+            } = await requestAlert(formData.title, formData.description, 'video', formData.category);
+            localStorage.setItem('broadcastToken', token);
+            window.location.reload();
         }
-
-        setFormData({
-            type: 'video',
-            category: 'city',
-            title: '',
-            description: '',
-        });
+        onClose(); // Close the modal after submission
     };
+
+    const initialRef = React.useRef(null);
+    const finalRef = React.useRef(null);
 
     return (
-        <div className="Home">
-            <form onSubmit={handleSubmit}>
-                <div className="form-entry">
-                    <label htmlFor="type">Type</label>
-                    <select name="type" onChange={handleChange} value={formData.type} className="entry">
-                        <option value="video">Video</option>
-                        <option value="co2">CO2 level</option>
-                        <option value="sound">Sound level</option>
-                    </select>
-                </div>
+        <>
+            <Button colorScheme="messenger"  onClick={onOpen}>
+                Créer une Alerte
+            </Button>
 
-                <div className="form-entry">
-                    <label htmlFor="category">Type</label>
-                    <select name="category" onChange={handleChange} value={formData.category}
-                            className="entry">
-                        <option value="city">City</option>
-                        <option value="company">Company</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
+            <Modal
+                initialFocusRef={initialRef}
+                finalFocusRef={finalRef}
+                isOpen={isOpen}
+                onClose={onClose}
+            >
+                <ModalOverlay/>
+                <ModalContent>
+                    <ModalHeader>Alerte</ModalHeader>
+                    <ModalCloseButton/>
+                    <form onSubmit={handleSubmit}>
+                        <ModalBody pb={6}>
+                            <FormControl isRequired mt={4}>
+                                <FormLabel>Sujet d'Alerte</FormLabel>
+                                <Select name="category" onChange={handleInputChange} value={formData.category}>
+                                    <option value="city">Ville</option>
+                                    <option value="company">Entreprise</option>
+                                    <option value="other">Autre</option>
+                                </Select>
+                            </FormControl>
 
-                <div className="form-entry">
-                    <label htmlFor="title">Title</label>
-                    <input className="entry" onChange={handleChange} value={formData.title}
-                           name="title"></input>
-                </div>
+                            <FormControl isRequired mt={4}>
+                                <FormLabel>Titre</FormLabel>
+                                <Input
+                                    name="title"
+                                    onChange={handleInputChange}
+                                    value={formData.title}
+                                    placeholder="Entrez un titre pour votre alerte"
+                                />
+                            </FormControl>
 
-                <div className="form-entry">
-                    <label for="description">Description</label>
-                    <textarea className="entry" onChange={handleChange} value={formData.description}
-                              name="description"></textarea>
-                </div>
+                            <FormControl isRequired mt={4}>
+                                <FormLabel>Description</FormLabel>
+                                <Input
+                                    name="description"
+                                    onChange={handleInputChange}
+                                    value={formData.description}
+                                    placeholder="Entrez une description pour votre alerte"
+                                />
+                            </FormControl>
+                        </ModalBody>
 
-                <button className="form-entry" type="submit">Launch an alert</button>
-            </form>
-        </div>
+                        <ModalFooter>
+                            <Button type="submit" colorScheme="blue" mr={3}>
+                                Lancer une alerte
+                            </Button>
+                            <Button onClick={onClose}>Annuler</Button>
+                        </ModalFooter>
+                    </form>
+                </ModalContent>
+            </Modal>
+        </>
     );
 }
 

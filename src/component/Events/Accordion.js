@@ -1,5 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Box } from '@chakra-ui/react';
+import React, { useState, useEffect } from "react";
+import {
+  Accordion,
+  AccordionItem,
+  AspectRatio,
+  Image,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+} from "@chakra-ui/react";
 
 function AccordionComponent({ items }) {
   const [accordionItems, setAccordionItems] = useState([]);
@@ -18,20 +27,45 @@ function AccordionComponent({ items }) {
 
   return (
     <Box p={5}>
-      <h1>Fil des alertes</h1>
-      <Accordion>
+      <Accordion allowToggle>
         {accordionItems.map((item, index) => (
           <AccordionItem key={index}>
             <h2>
-              <AccordionButton onClick={() => handleToggle(index)} _expanded={{ bg: "gray.100" }}>
-                <Box flex="1" textAlign="left">
-                  {item.title}
+              <AccordionButton onClick={() => handleToggle(index)}>
+                <Box className="borderBox">
+                  <div className="accordionButtonText">
+                    {item.title +
+                      " | categorie : " +
+                      item.category +
+                      " | type : " +
+                      item.type}
+                  </div>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <p>{item.content}</p>
+              <div className="accordionPanelText">{item.content}</div>
+              <div className="center">
+              {(() => {
+                switch (item.type) {
+                  case "video":
+                    return (
+                      <video width="300" height="auto" controls>
+                        <source src={item.link}></source>
+                        Your browser does not support the video tag.
+                      </video>
+                    );
+                  case "photo":
+                    return (
+                      <img src={item.link} width="300" height="auto" className="centered-image"></img>
+                    );
+                  // Add more cases as needed
+                  default:
+                    return null;
+                }
+              })()}
+              </div>
             </AccordionPanel>
           </AccordionItem>
         ))}

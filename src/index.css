@@ -7,6 +7,7 @@
   --navbar-color-text:#013120;
   --navbar-hover-color:#bddbce;
   --title-color:#fffaee;
+  --title-second:#465a48c0;
 }
 
 
@@ -23,8 +24,7 @@
 
 @font-face {
   font-family: 'Stencil';
-  src: url('./font/KCObraLetraBold.woff2') format('woff2'),
-       url('./font/KCObraLetraBold.woff') format('woff');
+  src: url('./font/StencilRegular.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -50,27 +50,105 @@
 
 
 /*! -----------TEXT------------ */
+
+.parent-of-title { /* Replace with the actual parent class or element */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Make sure parent has a defined height */
+  margin:10%;
+}
+
 .title {
+
+  
+  font-size: 50px;
+  color:var(--title-color) ;
+  text-decoration: underline;
+  font-family: 'KCObraLetraRegular', sans-serif;
+  display: block;
+  text-align: center;
+  align-items: center;
+
+}
+.title2 {
 
   margin-top: 3%;
   font-size: 50px;
   color:var(--title-color) ;
-  text-decoration: underline;
-  font-family: 'Stencil', sans-serif;
+  text-decoration: none;
+  font-family: 'KCObraLetraRegular', sans-serif;
+  display: block;
   text-align: center;
+  align-items: center;
 
+}
+.filterText {
+  color:var(--title-color) ;
+  text-decoration:none;
+  font-family: 'Stencil', sans-serif;
+  padding:5px 8px 5px 8px;
+  border-radius: 15px;
+}
+
+.filterText2 {
+  color:var(--title-color) ;
+  text-decoration:none;
+  font-family: 'Stencil', sans-serif;
+  padding:5px 8px 5px 8px;
+  border-radius: 15px;
+}
+
+
+.filterText:hover {
+  background-color: rgb(38, 36, 36);
+}
+
+.accordionButtonText{
+  color:var(--title-color) ;
+  font-size:calc(0.8vh + 0.7rem);
+}
+.accordionPanelText{
+  color:var(--navbar-color-text) ;
+  font-size: calc(0.8vh + 0.7rem);
+  font-family: 'Stencil', sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+.borderBox{
+  border: 3px #fffaee;
+  flex:1;
+  text-align:left;
 }
 
 .center {
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+}
+.centered-image {
+  display: flex ; 
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
+
+.footer-posts {
+  padding-bottom: 5%;
+}
+
 
 .right {
   text-align: right;
 }
+
+.filter{
+  margin: 1%;
+}
+
 /*! -----------NAV------------ */
 /* Style the links */
-nav>ul>li>a {
+.link {
   color: var(--navbar-color-text);
   font-size: 23px;
   font-family: 'Impact', sans-serif;
@@ -79,8 +157,12 @@ nav>ul>li>a {
   border-radius: 7px; /* Rounded corners */
 }
 
+.menuD {
+  margin-left: 4%;
+}
+
 /* Style the links on hover */
-nav>ul>li>a:hover {
+.link:hover {
   background-color: var(--navbar-hover-color); /* Change color on hover */
 }
 
@@ -96,7 +178,7 @@ nav, nav ul, nav img, nav a, nav li {
 }
 
 .navbar-logo {
-  height: 8vh;
+  height: calc(3vh + 2rem);
   margin-right: 0;
 }
 
@@ -129,31 +211,12 @@ nav ul li {
 /*! -----------CARD------------ */
 
 .rowCard{
-
-}
-
-/* Apply styles for medium screens and up */
-@media screen and (min-width: 48em) { /* 48em is equivalent to 768px */
-  .rowCard {
-    margin: 100px;
-  }
+  height: 100%;
+  margin-bottom: 5%;
 }
 
 
 
-/*! -----------PARALLAX------------ */
-
-
-.parallax-background {
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-.parallax-title {
-  text-align: center;
-  color: white; /* or any color of your choice */
-  font-size: 2rem; /* adjust as needed */
-}
 
 /*! -----------SCROLL------------ */
 
@@ -166,4 +229,23 @@ nav ul li {
 .scroll-section {
   scroll-snap-align: start;
   height: 100vh; /* Adjust based on your content */
+}
+
+
+.scroll-section-sm {
+  scroll-snap-align: start;
+  height: 100vh; /* Adjust based on your content */
+}
+
+@media (max-width: 400px) {
+  .scroll-section-sm {
+    scroll-snap-align: start;
+    height: 100vh; /* Adjust based on your content */
+  }
+}
+
+@media (max-width: 400px) { /* Example breakpoint */
+  .scroll-section {
+    height: 40vh; /* Adjust height for smaller screens */
+  }
 }

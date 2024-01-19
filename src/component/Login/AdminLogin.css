@@ -1,5 +1,28 @@
-  .text-login{
+  .login-form{
     color : var( --navbar-hover-color);
     font-size: 20px;
-    font-style: 'KCObraLetraRegular', sans-serif
+    font-style: 'KCObraLetraRegular', sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+
+  .logout-text{
+    color : var( --title-color);
+    font-size: 20px;
+    font-style: 'KCObraLetraRegular', sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-logout{
+    margin-top: 3%;
+  }
+
+  .button-login{
+    margin-top: 2%;
+  }
+  
+  .center-logout {
+    text-align: center;
+    padding-top: 5%;
   }

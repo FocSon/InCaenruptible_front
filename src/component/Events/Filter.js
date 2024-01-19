@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Checkbox, CheckboxGroup, Stack } from '@chakra-ui/react';
+import React, { useState, useEffect } from "react";
+import { Checkbox, CheckboxGroup, Stack } from "@chakra-ui/react";
 
 function FilterComponent({ onFilterChange }) {
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -20,25 +20,34 @@ function FilterComponent({ onFilterChange }) {
   };
 
   return (
-    <CheckboxGroup colorScheme='green'>
-      <Stack spacing={[1, 5]} direction={['column', 'row']} value={selectedFilters}>
-        <Checkbox defaultChecked onChange={() => handleCheckboxChange('VOD')}>
-          Video
+    <CheckboxGroup colorScheme="green">
+      <Stack
+        spacing={[1, 5]}
+        direction={["column", "row"]}
+        wrap="wrap"
+        value={selectedFilters}
+        className="filter"
+      >
+        <Checkbox defaultChecked onChange={() => handleCheckboxChange("VOD")}>
+          <div className="filterText"> Video</div>
         </Checkbox>
-        <Checkbox defaultChecked onChange={() => handleCheckboxChange('PICTURE')}>
-          Photo
+        <Checkbox
+          defaultChecked
+          onChange={() => handleCheckboxChange("PICTURE")}
+        >
+          <div className="filterText">Photo </div>
         </Checkbox>
-        <Checkbox defaultChecked onChange={() => handleCheckboxChange('DATA')}>
-          Data
+        <Checkbox defaultChecked onChange={() => handleCheckboxChange("DATA")}>
+          <div className="filterText"> Data</div>
         </Checkbox>
-        <Checkbox defaultChecked onChange={() => handleCheckboxChange('POLL')}>
-          Pollution
+        <Checkbox defaultChecked onChange={() => handleCheckboxChange("POLL")}>
+          <div className="filterText">Pollution</div>
         </Checkbox>
-        <Checkbox defaultChecked onChange={() => handleCheckboxChange('SOUND')}>
-          Nuissance Sonore
+        <Checkbox defaultChecked onChange={() => handleCheckboxChange("SOUND")}>
+          <div className="filterText">Nuissance Sonore</div>
         </Checkbox>
-        <Checkbox defaultChecked onChange={() => handleCheckboxChange('TRASH')}>
-          Deterioration
+        <Checkbox defaultChecked onChange={() => handleCheckboxChange("TRASH")}>
+          <div className="filterText">Deterioration</div>
         </Checkbox>
       </Stack>
     </CheckboxGroup>

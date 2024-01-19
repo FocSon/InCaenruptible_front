@@ -1,52 +1,69 @@
-import React, {useState} from 'react';
-import VideoPlayer from './VideoPlayer';
-import "./Home.css";
-import Spinner from "./Spinner";
-import CreateAlertForm from "./CreateAlertForm";
-import HomeService from "../service/HomeService";
+import {useEffect, useMemo, useState} from 'react';
+import CreateAlertForm from './CreateAlertForm';
+import {socket} from '../sockets';
+import './Home.css';
+import StreamVideoFrame from './StreamVideoFrame';
 
 const Home = () => {
-    let [homeService, alert] = useState(false);
+    const [alerts, setAlerts] = useState([]);
+    const [mainAlertId, setMainAlertId] = useState(null);
 
-    homeService = new HomeService();
+    const mainAlert = useMemo(() => {
+        return alerts.find((alert) => alert.id === mainAlertId);
+    }, [alerts, mainAlertId]);
 
-    homeService.fetchAlertPresent().then(r => {
-        alert = r;
-    });
+    useEffect(() => {
+        socket.on('init', function (event) {
+            setAlerts(event.alerts);
+            setMainAlertId(event.mainAlertId);
+            console.log(event);
+        });
 
+        socket.emit('askInit', {});
+
+        socket.on('setMainAlert', (data) => {
+            setMainAlertId(data.id);
+        });
+
+        socket.on('newAlert', (data) => {
+            setAlerts((alerts) => [...alerts, data.alert]);
+        });
+
+        socket.on('deleteAlert', (data) => {
+            setAlerts((alerts) => alerts.filter((alert) => alert.id !== data.id));
+        });
+
+        socket.on('alertDone', (data) => {
+            setAlerts((alerts) => alerts.filter((alert) => alert.id !== data.id));
+        });
+
+        return () => {
+            socket.off(`init`);
+            socket.off(`setMainAlert`);
+            socket.off(`newAlert`);
+            socket.off(`deleteAlert`);
+            socket.off(`alertDone`);
+        };
+    }, []);
 
     return (
-        <div className="Home">
-            {
-                alert.length && alert.endTime < Date.now() ?
-                    <div>
-                        <VideoPlayer length={40}
-                                     url="https://www.youtube.com/watch?v=Rq5SEhs9lws&ab_channel=Skillthrive"/>
-                        <h1>Titre</h1>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore
-                            et dolore magna aliqua. Nibh sit amet commodo nulla facilisi. Donec adipiscing tristique
-                            risus nec
-                            feugiat in. Turpis egestas pretium aenean pharetra magna ac placerat. Egestas sed sed risus
-                            pretium.
-                            Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc. Urna molestie
-                            at elementum eu.</h4>
-                    </div>
-                    :
-                    <div>
-                        {
-                            homeService.alertAwaitingConfirmation ?
-                                <Spinner text="Awaiting stream validation, don't leave the page ...."/>
-                                :
-                                <div>
-                                    <CreateAlertForm homeService={homeService}/>
-                                    <video id="webcamVideo" width="640" height="480" autoPlay></video>
-                                    <video id="remoteVideo" width="640" height="480" autoPlay></video>
-                                </div>
-                        }
-                    </div>
-            }
-        </div>
+        <>
+            <main className="content bodyColor ">
+                {
+                    mainAlert ? (
+                        <div style={{color: 'white'}}>
+                            <StreamVideoFrame streamId={mainAlert.id}/>
+                            <h1>{mainAlert.title}</h1>
+                            <h4>{mainAlert.description}</h4>
+                        </div>
+                    ) : <p style={{color: 'white'}}>Pas d'alerte</p>
+                }
+                <div className="alertButton">
+                    <CreateAlertForm/>
+                </div>
+
+            </main>
+        </>
     );
 };
 

@@ -1,30 +1,39 @@
 import React from 'react';
-import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
-import logo from "../imgs/logo.png";
-import Posts from "./Posts";
-import AdminLogin from "./Login/AdminLogin";
-import Events from "./Events/Events";
-import Home from "./Home";
+import { Link } from 'react-router-dom';
+import { Box, Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import logo from '../imgs/logo.png';
 
 function Navbar() {
     return (
-        <Router>
-            <nav>
-                <img src={logo} alt="Logo" className="navbar-logo" />
+        <Box as="nav" display="flex" justifyContent="left" alignItems="center" p={4}>
+            <Box>
+                <img src={logo} alt="Logo" className='navbar-logo' />
+            </Box>
 
+            <Box display={{ base: 'none', md: 'block' }}>
                 <ul>
-                    <li><Link to="*">Principal</Link></li>
-                    <li className='center'><Link to="/posts">Posts</Link></li>
-                    <li className='right'><Link to="/events">Evenements</Link></li>
+                    <li><Link className='link' to="*">Principal</Link></li>
+                    <li><Link className='link' to="/posts">Posts</Link></li>
+                    <li><Link  className='link'to="/events">Evenements</Link></li>
+                    {window.localStorage.getItem('token') !== null
+                    && <li><Link className='link' to="/handle-alerts">Manager</Link></li>
+                }
                 </ul>
-            </nav>
-            <Routes>
-                <Route path="*" element={<Home />} />
-                <Route path="/posts" element={<Posts />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/admin-login" element={<AdminLogin />} />
-            </Routes>
-        </Router> //it is not required to have a login button as only the admin will use it
+            </Box>
+
+            <Menu>
+                <MenuButton as={IconButton} icon={<HamburgerIcon />} className='menuD' display={{ base: 'block', md: 'none' }} />
+                <MenuList>
+                    <MenuItem as={Link} to="*">Principal</MenuItem>
+                    <MenuItem as={Link} to="/posts">Posts</MenuItem>
+                    <MenuItem as={Link} to="/events">Evenements</MenuItem>
+                    {window.localStorage.getItem('token') !== null
+                    &&  <MenuItem as={Link} to="/handle-alerts">Manager</MenuItem> 
+                }
+                </MenuList>
+            </Menu>
+        </Box>
     );
 }
 

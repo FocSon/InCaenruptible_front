@@ -1,0 +1,115 @@
+.handle-alerts h2 {
+    color: var(--title-color);
+    font-size: 3em;
+    font-style: 'KCObraLetraRegular', sans-serif;
+    margin: 5%;
+}
+
+.handle-alerts {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+}
+
+.handle-alerts > div {
+    width: 50%;
+    margin: 0 1em;
+}
+
+.requests {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    color: white;
+}
+
+.requests .request {
+    width: 100%;
+    background-color: var(--second-bg-color);
+    margin: .5em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column; /* Changed to column */
+    border-radius: .5em;
+}
+
+.requests .request h3, .requests .request h4 {
+    color: var(--navbar-hover-color);
+    font-size: 2em; 
+    font-style: 'KCObraLetraRegular', sans-serif;
+    margin-left: 0; 
+    text-align: left; 
+}
+
+.requests .request h4 {
+    font-size: 1.4em; 
+}
+
+.requests .request .request-buttons {
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    align-items: flex-start; 
+}
+
+.requests .request .request-buttons button {
+    margin: .5em;
+    background-color: var(--navbar-hover-color);
+    color: black;
+    padding: .5em;
+    border-radius: .5em;
+    width: 50px;
+    height: 50px;
+}
+.alerts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 70%;
+    color: white;
+}
+
+.alerts .alert {
+    width: 100%;
+    background-color: var(--second-bg-color);
+    margin: .5em;
+    margin-bottom: 15%;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column; 
+    border-radius: .5em;
+}
+
+.alerts .alert h3, .alerts .alert h4 {
+    color: var(--navbar-hover-color);
+    font-size: 2em;
+    font-style: 'KCObraLetraRegular', sans-serif;
+    text-align: left; 
+}
+
+.alerts .alert h4 {
+    font-size: 1.4em;
+}
+
+.alerts .alert .alert-buttons {
+    display: flex;
+    flex-direction: row; 
+    justify-content: flex-end; 
+    align-content: center;
+    align-items: flex-start; 
+    width: 100%;
+}
+
+.alerts .alert .alert-buttons button {
+    margin: .2em;
+    background-color: var(--navbar-hover-color);
+    color: black;
+    padding: .5em;
+    border-radius: .5em;
+}
+
