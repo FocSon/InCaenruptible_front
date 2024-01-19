@@ -4,6 +4,9 @@ import loginService from '../../services/login.service';
 import {socket} from '../../sockets';
 import {acceptRequest, deleteAlert, endAlert, refuseRequest, setMainAlert} from '../../services/admin.service';
 import {background} from '@chakra-ui/styled-system';
+import { Box, Button, Heading, Text, VStack, Center, Flex } from '@chakra-ui/react';
+import { CheckIcon, CloseIcon, StarIcon, RepeatClockIcon, DeleteIcon } from '@chakra-ui/icons';
+
 
 const HandleAlerts = () => {
     const [requests, setRequests] = React.useState([]);
@@ -73,85 +76,66 @@ const HandleAlerts = () => {
     }
 
     return (
-        <div className="handle-alerts">
-            <div>
-                <h2>Demandes</h2>
-                <div className={'requests'}>
-                    {
-                        requests.map((request, index) => {
-                            return (
-                                <div key={index} className={'request'}>
-                                    <div>
-                                        <h3>{request.title}</h3>
-                                        <p>{request.description}</p>
-                                    </div>
-                                    <div className={'request-buttons'}>
-                                        <button
-                                            style={{backgroundColor: 'blue'}}
-                                            onClick={async () => {
+        <main className="content bodyColor ">
+        <Box className="handle-alerts">
+            <Box>
+                <Heading as="h2">Demandes</Heading>
+                <Box className="requests">
+                    {requests.map((request, index) => (
+                        <Box key={index} className="request">
+                            <Heading as="h3" size="md">{request.title}</Heading>
+                            <Text as="h4">{request.description}</Text>
+                            <Flex justifyContent="flex-end">
+                                <VStack spacing={2}>
+                                    <Center>
+                                        <Button leftIcon={<CheckIcon />} colorScheme="blue" onClick={async () => {
                                             await acceptRequest(request.requestId);
-                                        }}/>
-                                        <button
-                                            style={{backgroundColor: 'red'}}
-                                            onClick={async () => {
+                                        }} />
+                                    </Center>
+                                    <Center>
+                                        <Button leftIcon={<CloseIcon />} colorScheme="red" onClick={async () => {
                                             await refuseRequest(request.requestId);
-                                        }}/>
-                                    </div>
-                                </div>
-                            );
-                        })
-                    }
-                </div>
-            </div>
-            <div>
-                <h2>Alertes en cours</h2>
-                <div className={'alerts'}>
-                    {
-                        alerts.map((alert, index) => {
-                            return (
-                                <div key={index} className={'alert'}>
-                                    <div>
-                                        <h3
-                                            style={mainId && mainId === alert.id ? {color: 'red'} : {}}
-                                        >{alert.title}</h3>
-                                        <p>{alert.description}</p>
-                                    </div>
-                                    <div className={'alert-buttons'}>
-                                        <button onClick={async () => {
-                                            await setMainAlert(alert.id)
-                                        }}>Principale
-                                        </button>
-                                        <button onClick={async () => {
-                                            await endAlert(alert.id, 'L\'alerte a été terminée par l\'administrateur')
-                                        }}>Terminer
-                                        </button>
-                                        <button onClick={async () => {
-                                            await deleteAlert(alert.id)
-                                        }}>Supprimer
-                                        </button>
-                                    </div>
-                                </div>
-                            );
-                        })
-                    }
-                </div>
-            </div>
-        </div>
+                                        }} />
+                                    </Center>
+                                </VStack>
+                            </Flex>
+                        </Box>
+                    ))}
+                </Box>
+            </Box>
+            <Box>
+                <Heading as="h2">Alertes en cours</Heading>
+                <Box className="alerts">
+                    {alerts.map((alert, index) => (
+                        <Box key={index} className="alert">
+                            <Heading as="h3" size="lg" color={mainAlertId && mainAlertId === alert.id ? "red" : "inherit"}>{alert.title}</Heading>
+                            <Text as="h4">{alert.description}</Text>
+                            <Flex justifyContent="flex-end">
+                                <VStack spacing={2}>
+                                    <Button iconSpacing={0}  size="lg" colorScheme="gray" onClick={async () => {
+                                        await setMainAlert(alert.id);
+                                    }}>
+                                        <StarIcon w={6} h={6} />
+                                    </Button>
+                                    <Button iconSpacing={0}  size="lg" onClick={async () => {
+                                        await endAlert(alert.id, 'L\'alerte a été terminée par l\'administrateur');
+                                    }}>
+                                        <RepeatClockIcon w={6} h={6} />
+                                    </Button>
+                                    <Button iconSpacing={0}  size="lg" colorScheme="gray" onClick={async () => {
+                                        await deleteAlert(alert.id);
+                                    }}>
+                                        <DeleteIcon w={6} h={6} />
+                                    </Button>
+                                </VStack>
+                            </Flex>
+                        </Box>
+                    ))}
+                </Box>
+            </Box>
+        </Box>
+        </main>
     );
-    //Dans Demandes
-    //ajouter les boutons pour accepter et refuser
-    //Quand on accepte ou refuse
-    //api/acceptAlert ou refuseAlert (POST)
-
-
-    //Dans Alertes en cours
-    //comment récupérer les alertes acceptées ? base de données ?
-    //pour chaque alerte ajouter bouton "définir comme alerte principale", "marquer comme terminée", "supprimer alerte", "modifier"
-    //pour chaque bouton, utiliser api/setMainAlert, api/deleteAlert, api/endAlert et "api/updateAlert" (POST)
-
-    //...admin/watchRequest, admin:stopWatchRequest, admin:streamRequestData??
-
-    //où mettre admin:endAdminSession??????
 };
 
 export default HandleAlerts;

@@ -54,7 +54,7 @@ const Event = () => {
     {
       id: 5,
       title: 'Nestlo deverse ses eaux polluées dans l Orne !',
-      description: 'Un reporter audacieux a pu prendre en photo les pratiques honteuses de Nestlo. Cette enterprise se croit tout permis et deverse directement ses déchets dans l Orne. Nous ne laisserons pas ces actes impunis',
+      description: 'Un reporter audacieux a pu prendre en photo les pratiques honteuses de Nestlo. Cette entreprise se croit tout permis et deverse directement ses déchets dans l Orne. Nous ne laisserons pas ces actes impunis',
       startTime: 1644566400000,
       endTime: null,
       type: 'photo', //video, photo, data
@@ -134,8 +134,9 @@ const Event = () => {
   
 
   return (
-    <main className=''>
+    <main className='content bodyColor'>
       <FilterComponent onFilterChange={handleFilterChange}/>
+      <h1 className="title2">Fil des alertes</h1>
       <AccordionComponent items={items}/>
     </main>
   );

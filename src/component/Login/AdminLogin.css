@@ -7,7 +7,7 @@
   }
 
   .logout-text{
-    color : var( --navbar-hover-color);
+    color : var( --title-color);
     font-size: 20px;
     font-style: 'KCObraLetraRegular', sans-serif;
     display: flex;
@@ -15,5 +15,14 @@
   }
 
   .button-logout{
-    border: 2px solid #ffffff;
+    margin-top: 3%;
+  }
+
+  .button-login{
+    margin-top: 2%;
+  }
+  
+  .center-logout {
+    text-align: center;
+    padding-top: 5%;
   }
