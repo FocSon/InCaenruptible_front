@@ -16,7 +16,7 @@ Now, all you need to do is to click on this link in order to reach the website :
 
 ### Warning
 
-In order to be able to use all of this server's functionalities, it is necessary to have a SSL secure server and access the website through HTTPS protocol. Otherwise, video streams will be blocked by the browser and you won't be able to see this functionality.
+In order to be able to use all of this server's functionalities, it is necessary to have a SSL secured server and access the website through HTTPS protocol. Otherwise, video streams will be blocked by the browser and you won't be able to see this functionality.
 
 
 ### Use case diagram
